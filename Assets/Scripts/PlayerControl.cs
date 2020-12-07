@@ -16,7 +16,10 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        SwitchToPlayer1();
+        players[0].GetComponent<Character1Skills>().enabled = true;
+        players[1].GetComponent<Character2Skills>().enabled = false;
+        players[2].GetComponent<Character3Skills>().enabled = false;
+        currentPlayer = players[0];
     }
 
     void FixedUpdate()
@@ -104,30 +107,34 @@ public class PlayerControl : MonoBehaviour
         transform.localScale = Scaler;
     }
 
-    public void SwitchToPlayer1()
+    public void SwitchPlayer(int playerNum)
     {
-        currentPlayer = players[0];
-        currentPlayer.tag = "CurrentPlayer";
-        players[0].GetComponent<Character1Skills>().enabled = true;
-        players[1].GetComponent<Character2Skills>().enabled = false;
-        players[2].GetComponent<Character3Skills>().enabled = false;
-    }
+        GameObject prevPlayer = currentPlayer;
 
-    public void SwitchToPlayer2()
-    {
-        currentPlayer = players[1];
-        currentPlayer.tag = "CurrentPlayer";
-        players[1].GetComponent<Character2Skills>().enabled = true;
-        players[0].GetComponent<Character1Skills>().enabled = false;
-        players[2].GetComponent<Character3Skills>().enabled = false;
-    }
+        prevPlayer.transform.position = GameObject.FindGameObjectWithTag("Player" + playerNum).transform.position;
+        prevPlayer.transform.localScale = GameObject.FindGameObjectWithTag("Player" + playerNum).transform.localScale;
 
-    public void SwitchToPlayer3()
-    {
-        currentPlayer = players[2];
-        currentPlayer.tag = "CurrentPlayer";
-        players[2].GetComponent<Character3Skills>().enabled = true;
-        players[0].GetComponent<Character1Skills>().enabled = false;
-        players[1].GetComponent<Character2Skills>().enabled = false;
+        currentPlayer = players[playerNum - 1];
+        currentPlayer.transform.position = new Vector3(transform.position.x, transform.position.y, currentPlayer.transform.position.z);
+        currentPlayer.transform.localScale = new Vector3(0.5f, 0.5f, currentPlayer.transform.localScale.z);
+
+        if(playerNum == 1)
+        {
+            players[0].GetComponent<Character1Skills>().enabled = true;
+            players[1].GetComponent<Character2Skills>().enabled = false;
+            players[2].GetComponent<Character3Skills>().enabled = false;
+        }
+        else if(playerNum == 2)
+        {
+            players[1].GetComponent<Character2Skills>().enabled = true;
+            players[0].GetComponent<Character1Skills>().enabled = false;
+            players[2].GetComponent<Character3Skills>().enabled = false;
+        } 
+        else if(playerNum == 3)
+        {
+            players[2].GetComponent<Character3Skills>().enabled = true;
+            players[0].GetComponent<Character1Skills>().enabled = false;
+            players[1].GetComponent<Character2Skills>().enabled = false;
+        }
     }
 }
