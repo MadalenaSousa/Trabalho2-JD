@@ -12,7 +12,6 @@ public class PlayerControl : MonoBehaviour
     GameObject currentPlayer;
 
     bool isFacingRight = true;
-    bool isFacingDown = true;
 
     void Start()
     {
