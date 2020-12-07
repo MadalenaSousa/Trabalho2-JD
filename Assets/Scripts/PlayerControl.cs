@@ -11,10 +11,15 @@ public class PlayerControl : MonoBehaviour
     public GameObject[] players = new GameObject[3];
     GameObject currentPlayer;
 
+    bool isFacingRight = true;
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        SwitchToPlayer1();
+        players[0].GetComponent<Character1Skills>().enabled = true;
+        players[1].GetComponent<Character2Skills>().enabled = false;
+        players[2].GetComponent<Character3Skills>().enabled = false;
+        currentPlayer = players[0];
     }
 
     void FixedUpdate()
@@ -22,29 +27,114 @@ public class PlayerControl : MonoBehaviour
         moveInputX = Input.GetAxis("Horizontal");
         moveInputY = Input.GetAxis("Vertical");
         body.velocity = new Vector2(moveInputX * speed, moveInputY * speed);
+
+        if(isFacingRight && moveInputX < 0)
+        {
+            FlipHorizontal();
+        } else if(isFacingRight == false && moveInputX > 0)
+        {
+            FlipHorizontal();
+        }
+
+        if (moveInputX < 0)
+        {
+            transform.eulerAngles = new Vector3(
+                transform.eulerAngles.x,
+                transform.eulerAngles.y,
+                -90f);
+
+            for(int i = 0; i < 3; i++)
+            {
+                transform.GetChild(i).transform.eulerAngles = new Vector3(
+                    transform.eulerAngles.x,
+                    transform.eulerAngles.y,
+                    0f);
+            }
+                
+        }
+        else if (moveInputX > 0)
+        {
+            transform.eulerAngles = new Vector3(
+                transform.eulerAngles.x,
+                transform.eulerAngles.y,
+                90f);
+
+            for (int i = 0; i < 3; i++)
+            {
+                transform.GetChild(i).transform.eulerAngles = new Vector3(
+                    transform.eulerAngles.x,
+                    transform.eulerAngles.y,
+                    0f);
+            }
+        } 
+        else if (moveInputY < 0)
+        {
+            transform.eulerAngles = new Vector3(
+                transform.eulerAngles.x,
+                transform.eulerAngles.y,
+                0f);
+
+            for (int i = 0; i < 3; i++)
+            {
+                transform.GetChild(i).transform.eulerAngles = new Vector3(
+                    transform.eulerAngles.x,
+                    transform.eulerAngles.y,
+                    0f);
+            }
+        } 
+        else if(moveInputY > 0)
+        {
+            transform.eulerAngles = new Vector3(
+                transform.eulerAngles.x,
+                transform.eulerAngles.y,
+                180f);
+
+            for (int i = 0; i < 3; i++)
+            {
+                transform.GetChild(i).transform.eulerAngles = new Vector3(
+                    transform.eulerAngles.x,
+                    transform.eulerAngles.y,
+                    0f);
+            }
+        }
     }
 
-    public void SwitchToPlayer1()
+    public void FlipHorizontal()
     {
-        currentPlayer = players[0];
-        players[0].GetComponent<Character1Skills>().enabled = true;
-        players[1].GetComponent<Character2Skills>().enabled = false;
-        players[2].GetComponent<Character3Skills>().enabled = false;
+        isFacingRight = !isFacingRight;
+        Vector3 Scaler = transform.localScale; //get scale
+        Scaler.x *= -1; //flip it
+        transform.localScale = Scaler;
     }
 
-    public void SwitchToPlayer2()
+    public void SwitchPlayer(int playerNum)
     {
-        currentPlayer = players[1];
-        players[1].GetComponent<Character2Skills>().enabled = true;
-        players[0].GetComponent<Character1Skills>().enabled = false;
-        players[2].GetComponent<Character3Skills>().enabled = false;
-    }
+        GameObject prevPlayer = currentPlayer;
 
-    public void SwitchToPlayer3()
-    {
-        currentPlayer = players[2];
-        players[2].GetComponent<Character3Skills>().enabled = true;
-        players[0].GetComponent<Character1Skills>().enabled = false;
-        players[1].GetComponent<Character2Skills>().enabled = false;
+        prevPlayer.transform.position = GameObject.FindGameObjectWithTag("Player" + playerNum).transform.position;
+        prevPlayer.transform.localScale = GameObject.FindGameObjectWithTag("Player" + playerNum).transform.localScale;
+
+        currentPlayer = players[playerNum - 1];
+        currentPlayer.transform.position = new Vector3(transform.position.x, transform.position.y, currentPlayer.transform.position.z);
+        currentPlayer.transform.localScale = new Vector3(0.5f, 0.5f, currentPlayer.transform.localScale.z);
+
+        if(playerNum == 1)
+        {
+            players[0].GetComponent<Character1Skills>().enabled = true;
+            players[1].GetComponent<Character2Skills>().enabled = false;
+            players[2].GetComponent<Character3Skills>().enabled = false;
+        }
+        else if(playerNum == 2)
+        {
+            players[1].GetComponent<Character2Skills>().enabled = true;
+            players[0].GetComponent<Character1Skills>().enabled = false;
+            players[2].GetComponent<Character3Skills>().enabled = false;
+        } 
+        else if(playerNum == 3)
+        {
+            players[2].GetComponent<Character3Skills>().enabled = true;
+            players[0].GetComponent<Character1Skills>().enabled = false;
+            players[1].GetComponent<Character2Skills>().enabled = false;
+        }
     }
 }
