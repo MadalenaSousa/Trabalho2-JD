@@ -4,10 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - CurrentPlayer
   - Player1
   - Player2
   - Player3
+  - Door1
   layers:
   - Default
   - TransparentFX
