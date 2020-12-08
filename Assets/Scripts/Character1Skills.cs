@@ -11,6 +11,7 @@ public class Character1Skills : MonoBehaviour
 
     void Update()
     {
-         Debug.Log("Player 1");
+        //o alexandre esteve aqui 
+        Debug.Log("Player 1");
     }
 }
