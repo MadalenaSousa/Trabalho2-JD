@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    public static PlayerControl instance;
+
     private Rigidbody2D body;
     private float moveInputX, moveInputY;
     public float speed = 5f;
 
     public GameObject[] players = new GameObject[3];
-    GameObject currentPlayer;
+    public GameObject currentPlayer;
 
     bool isFacingRight = true;
 
     void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+
         body = GetComponent<Rigidbody2D>();
         players[0].GetComponent<Character1Skills>().enabled = true;
         players[1].GetComponent<Character2Skills>().enabled = false;
