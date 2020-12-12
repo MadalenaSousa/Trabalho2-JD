@@ -27,6 +27,5 @@ public class Sphinx1 : MonoBehaviour
     public void closePanel()
     {
         firstEnigmaPanel.SetActive(false);
-        Destroy(GameObject.FindGameObjectWithTag("Door1")); //This is not here, this is in a function triggered by solving the first enigma, this is only for demonstrantion purpuses
     }
 }
