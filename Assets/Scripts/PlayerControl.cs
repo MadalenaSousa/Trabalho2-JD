@@ -15,6 +15,10 @@ public class PlayerControl : MonoBehaviour
 
     bool isFacingRight = true;
 
+    public int maxHealth = 100;
+    public int currentHealth;
+    public HealthBar healthBar;
+
     void Start()
     {
         if (instance == null)
@@ -27,6 +31,9 @@ public class PlayerControl : MonoBehaviour
         players[1].GetComponent<Character2Skills>().enabled = false;
         players[2].GetComponent<Character3Skills>().enabled = false;
         currentPlayer = players[0];
+
+        currentHealth = maxHealth;
+        healthBar.setMaxHealth(maxHealth);
     }
 
     void FixedUpdate()
@@ -143,5 +150,22 @@ public class PlayerControl : MonoBehaviour
             players[0].GetComponent<Character1Skills>().enabled = false;
             players[1].GetComponent<Character2Skills>().enabled = false;
         }
+    }
+
+    public void decreaseHealth(int healthValue)
+    {
+        currentHealth -= healthValue;
+        healthBar.setHealth(currentHealth);
+    }
+
+    public int getHealth()
+    {
+        return currentHealth;
+    }
+
+    public void setHealth(int healthToSet)
+    {
+        currentHealth = healthToSet;
+        healthBar.setHealth(currentHealth);
     }
 }
