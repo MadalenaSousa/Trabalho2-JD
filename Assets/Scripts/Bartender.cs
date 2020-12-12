@@ -6,7 +6,8 @@ using TMPro;
 
 public class Bartender : MonoBehaviour
 {
-    public Dialogue bartenderDialogue;
+    public Dialogue bartenderDialogueOther;
+    public Dialogue bartenderDialogueIsis;
     public GameObject bartenderPanel;
 
     void Start()
@@ -18,7 +19,14 @@ public class Bartender : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            FindObjectOfType<DialogueManager>().StartDialogue(bartenderDialogue, bartenderPanel);
+            if(PlayerControl.instance.currentPlayer.GetComponent<Character2Skills>())
+            {
+                FindObjectOfType<DialogueManager>().StartDialogue(bartenderDialogueIsis, bartenderPanel);
+            } else
+            {
+                FindObjectOfType<DialogueManager>().StartDialogue(bartenderDialogueOther, bartenderPanel);
+            }
+            
         }
     }
 }
