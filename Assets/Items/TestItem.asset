@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5acdb1b980660a49b5ecece099d49f1, type: 3}
   m_Name: TestItem
   m_EditorClassIdentifier: 
-  name: New Item
+  name: Esfinge Teste
   icon: {fileID: 0}
