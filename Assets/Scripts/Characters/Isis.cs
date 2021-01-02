@@ -5,6 +5,12 @@ using System.Linq;
 
 public class Isis : Player
 {
+    private void Start()
+    {
+        isActive = true;
+        //Debug.Log(gameObject.transform.localPosition);
+    }
+
     public Isis()
     {
         playerName = "Isis";
@@ -15,4 +21,5 @@ public class Isis : Player
         skills["endurance"] = 10;
         bestSkill = KeyByValue(skills, skills.Values.Max());
     }
+
 }

@@ -5,6 +5,12 @@ using System.Linq;
 
 public class Horus : Player
 {
+    private void Start()
+    {
+        isActive = false;
+        //Debug.Log(gameObject.transform.localPosition);
+    }
+
     public Horus()
     {
         playerName = "Horus";
@@ -15,4 +21,6 @@ public class Horus : Player
         skills["endurance"] = 10;
         bestSkill = KeyByValue(skills, skills.Values.Max());
     }
+
+  
 }

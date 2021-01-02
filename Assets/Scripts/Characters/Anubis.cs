@@ -5,6 +5,12 @@ using System.Linq;
 
 public class Anubis : Player
 {
+    private void Start()
+    {
+        isActive = false;
+        //Debug.Log(gameObject.transform.localPosition);
+    }
+
     public Anubis()
     {
         playerName = "Anubis";
@@ -15,4 +21,5 @@ public class Anubis : Player
         skills["endurance"] = 14;
         bestSkill = KeyByValue(skills, skills.Values.Max());
     }
+
 }

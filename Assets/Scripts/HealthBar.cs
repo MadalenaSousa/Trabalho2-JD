@@ -15,7 +15,7 @@ public class HealthBar : MonoBehaviour
 
     private void Update()
     {
-        HealthSlider.value = PlayerControl.instance.currentPlayer.currentHealth;
+        HealthSlider.value = PlayerControl.instance.currentPlayer.getHealth();
     }
 
     public void setToMaxHealth()

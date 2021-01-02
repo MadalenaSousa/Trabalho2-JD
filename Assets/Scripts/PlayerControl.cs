@@ -14,6 +14,8 @@ public class PlayerControl : MonoBehaviour
     public Player isis, horus, anubis;
 
     bool isFacingRight = true;
+    Player deadPlayer;
+    Player thirdPlayer;
 
     void Start()
     {
@@ -22,6 +24,8 @@ public class PlayerControl : MonoBehaviour
             instance = this;
         }
 
+        deadPlayer = null;
+
         body = GetComponent<Rigidbody2D>();
 
         isis = isis.GetComponent<Isis>();
@@ -29,6 +33,10 @@ public class PlayerControl : MonoBehaviour
         anubis = anubis.GetComponent<Anubis>();
         
         currentPlayer = isis;
+
+        Debug.Log(1 % 3);
+        Debug.Log(2 % 3);
+        Debug.Log(3 % 3);
     }
 
     void FixedUpdate()
@@ -108,6 +116,22 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D info)
+    {
+        if(deadPlayer != null)
+        {
+            if (info.tag == deadPlayer.tag && deadPlayer.isDead == true)
+            {
+                Debug.Log("Colidiu com: " + deadPlayer + ", which as a tag of " + deadPlayer.tag);
+                deadPlayer.transform.parent = gameObject.transform;
+                deadPlayer.transform.localPosition = new Vector3(-thirdPlayer.transform.localPosition.x, 2f, currentPlayer.transform.localPosition.z);
+                deadPlayer.transform.localScale = new Vector3(0.3f, 0.3f, currentPlayer.transform.localScale.z);
+                deadPlayer.isDead = false;
+                Debug.Log(isis.isDead);
+            }
+        }
+    }
+
     public void FlipHorizontal()
     {
         isFacingRight = !isFacingRight;
@@ -130,6 +154,7 @@ public class PlayerControl : MonoBehaviour
 
     public void die()
     {
+        deadPlayer = currentPlayer;
         currentPlayer.transform.position = GameManager.instance.lastCheckpoitPos;
         currentPlayer.isDead = true;
         currentPlayer.transform.parent = null;
@@ -144,11 +169,13 @@ public class PlayerControl : MonoBehaviour
             if(players[i].isDead == false)
             {
                 currentPlayer = players[i];
-                currentPlayer.transform.position = new Vector3(transform.position.x, transform.position.y, currentPlayer.transform.position.z);
-                currentPlayer.transform.localScale = new Vector3(0.5f, 0.5f, currentPlayer.transform.localScale.z);
+                thirdPlayer = players[(i + 1) % 3];
+                currentPlayer.setPrimaryPlayerCharacteristics();
                 currentPlayer.transform.parent = gameObject.transform;
                 break;
             }
         }
+
+        currentPlayer.setHealth((int)currentPlayer.maxHealth / 2);
     }
 }

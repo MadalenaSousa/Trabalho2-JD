@@ -7,9 +7,10 @@ public class Player : MonoBehaviour
 {    
     public string playerName;
     public int maxHealth;
-    public int currentHealth;
+    protected int currentHealth;
     public string bestSkill;
     public Dictionary<string, int> skills;
+    public bool isActive;
     public bool isDead;
 
     public Player()
@@ -41,6 +42,18 @@ public class Player : MonoBehaviour
     public void setHealth(int healthToSet)
     {
         currentHealth = healthToSet;
+    }
+
+    public void setPrimaryPlayerCharacteristics()
+    {
+        transform.localPosition = new Vector3(0, 0, 1);
+        transform.localScale = new Vector3(0.5f, 0.5f, transform.localScale.z);
+    }
+
+    public void setSecondaryPlayerCharacteristics(float x)
+    {
+        transform.localPosition = new Vector3(x, 2, 1);
+        transform.localScale = new Vector3(0.3f, 0.3f, transform.localScale.z);
     }
 
     public static string KeyByValue(Dictionary<string, int> dictionary, int val)
