@@ -168,4 +168,9 @@ public class PlayerControl : MonoBehaviour
         currentHealth = healthToSet;
         healthBar.setHealth(currentHealth);
     }
+
+    public void die()
+    {
+        currentPlayer.transform.position = GameManager.instance.lastCheckpoitPos;
+    }
 }
