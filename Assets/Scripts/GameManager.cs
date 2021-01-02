@@ -17,13 +17,15 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+
+        lastCheckpoitPos = new Vector2(-7, 2);
     }
 
     void Update()
     {
         if (PlayerControl.instance.currentPlayer.getHealth() <= 0)
         {
-            PlayerControl.instance.currentPlayer.die();
+            PlayerControl.instance.die();
         }
     }
 }

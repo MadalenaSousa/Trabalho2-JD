@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public int currentHealth;
     public string bestSkill;
     public Dictionary<string, int> skills;
+    public bool isDead;
 
     public Player()
     {
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
         maxHealth = 100;
         currentHealth = maxHealth;
         bestSkill = "none";
+        isDead = false;
 
         skills = new Dictionary<string, int>();
         skills.Add("strength", 0);
@@ -39,11 +41,6 @@ public class Player : MonoBehaviour
     public void setHealth(int healthToSet)
     {
         currentHealth = healthToSet;
-    }
-
-    public void die()
-    {
-        transform.position = GameManager.instance.lastCheckpoitPos;
     }
 
     public static string KeyByValue(Dictionary<string, int> dictionary, int val)
