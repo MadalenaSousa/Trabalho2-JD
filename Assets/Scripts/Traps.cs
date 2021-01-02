@@ -10,7 +10,7 @@ public class Traps : MonoBehaviour
     {
         if (info.gameObject.tag == "Player")
         {
-            PlayerControl.instance.decreaseHealth(healthValue);
+            PlayerControl.instance.currentPlayer.decreaseHealth(healthValue);
         }
     }
 }

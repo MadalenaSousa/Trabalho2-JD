@@ -41,6 +41,11 @@ public class Player : MonoBehaviour
         currentHealth = healthToSet;
     }
 
+    public void die()
+    {
+        transform.position = GameManager.instance.lastCheckpoitPos;
+    }
+
     public static string KeyByValue(Dictionary<string, int> dictionary, int val)
     {
         string key = default;

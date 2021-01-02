@@ -15,10 +15,6 @@ public class PlayerControl : MonoBehaviour
 
     bool isFacingRight = true;
 
-    public int maxHealth = 100;
-    public int currentHealth;
-    public HealthBar healthBar;
-
     void Start()
     {
         if (instance == null)
@@ -33,9 +29,6 @@ public class PlayerControl : MonoBehaviour
         anubis = anubis.GetComponent<Anubis>();
         
         currentPlayer = isis;
-
-        currentHealth = maxHealth;
-        healthBar.setMaxHealth(maxHealth);
     }
 
     void FixedUpdate()
@@ -133,27 +126,5 @@ public class PlayerControl : MonoBehaviour
 
         currentPlayer.transform.position = new Vector3(transform.position.x, transform.position.y, currentPlayer.transform.position.z);
         currentPlayer.transform.localScale = new Vector3(0.5f, 0.5f, currentPlayer.transform.localScale.z);
-    }
-
-    public void decreaseHealth(int healthValue)
-    {
-        currentHealth -= healthValue;
-        healthBar.setHealth(currentHealth);
-    }
-
-    public int getHealth()
-    {
-        return currentHealth;
-    }
-
-    public void setHealth(int healthToSet)
-    {
-        currentHealth = healthToSet;
-        healthBar.setHealth(currentHealth);
-    }
-
-    public void die()
-    {
-        currentPlayer.transform.position = GameManager.instance.lastCheckpoitPos;
     }
 }

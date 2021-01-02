@@ -21,9 +21,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (PlayerControl.instance.getHealth() <= 0)
+        if (PlayerControl.instance.currentPlayer.getHealth() <= 0)
         {
-            PlayerControl.instance.die();
+            PlayerControl.instance.currentPlayer.die();
         }
     }
 }
