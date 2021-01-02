@@ -10,8 +10,8 @@ public class PlayerControl : MonoBehaviour
     private float moveInputX, moveInputY;
     public float speed = 5f;
 
-    public GameObject[] players = new GameObject[3];
-    public GameObject currentPlayer;
+    public Player currentPlayer;
+    public Player isis, horus, anubis;
 
     bool isFacingRight = true;
 
@@ -27,10 +27,12 @@ public class PlayerControl : MonoBehaviour
         }
 
         body = GetComponent<Rigidbody2D>();
-        players[0].GetComponent<Character1Skills>().enabled = true;
-        players[1].GetComponent<Character2Skills>().enabled = false;
-        players[2].GetComponent<Character3Skills>().enabled = false;
-        currentPlayer = players[0];
+
+        isis = isis.GetComponent<Isis>();
+        horus = horus.GetComponent<Horus>();
+        anubis = anubis.GetComponent<Anubis>();
+        
+        currentPlayer = isis;
 
         currentHealth = maxHealth;
         healthBar.setMaxHealth(maxHealth);
@@ -121,35 +123,16 @@ public class PlayerControl : MonoBehaviour
         transform.localScale = Scaler;
     }
 
-    public void SwitchPlayer(int playerNum)
+    public void SwitchPlayer(Player newPlayer)
     {
-        GameObject prevPlayer = currentPlayer;
+        Player prevPlayer = currentPlayer;
+        currentPlayer = newPlayer;
 
-        prevPlayer.transform.position = GameObject.FindGameObjectWithTag("Player" + playerNum).transform.position;
-        prevPlayer.transform.localScale = GameObject.FindGameObjectWithTag("Player" + playerNum).transform.localScale;
+        prevPlayer.transform.position = GameObject.FindGameObjectWithTag(newPlayer.tag).transform.position;
+        prevPlayer.transform.localScale = GameObject.FindGameObjectWithTag(newPlayer.tag).transform.localScale;
 
-        currentPlayer = players[playerNum - 1];
         currentPlayer.transform.position = new Vector3(transform.position.x, transform.position.y, currentPlayer.transform.position.z);
         currentPlayer.transform.localScale = new Vector3(0.5f, 0.5f, currentPlayer.transform.localScale.z);
-
-        if(playerNum == 1)
-        {
-            players[0].GetComponent<Character1Skills>().enabled = true;
-            players[1].GetComponent<Character2Skills>().enabled = false;
-            players[2].GetComponent<Character3Skills>().enabled = false;
-        }
-        else if(playerNum == 2)
-        {
-            players[1].GetComponent<Character2Skills>().enabled = true;
-            players[0].GetComponent<Character1Skills>().enabled = false;
-            players[2].GetComponent<Character3Skills>().enabled = false;
-        } 
-        else if(playerNum == 3)
-        {
-            players[2].GetComponent<Character3Skills>().enabled = true;
-            players[0].GetComponent<Character1Skills>().enabled = false;
-            players[1].GetComponent<Character2Skills>().enabled = false;
-        }
     }
 
     public void decreaseHealth(int healthValue)
