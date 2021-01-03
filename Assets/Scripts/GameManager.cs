@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     {
         if (PlayerControl.instance.currentPlayer.getHealth() <= 0)
         {
-            //PlayerControl.instance.die();
+            PlayerControl.instance.die();
         }
     }
 }
