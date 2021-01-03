@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Traps : MonoBehaviour
 {
-    int healthValue = 1;
+    float healthValue = 1f;
 
     private void OnCollisionStay2D(Collision2D info)
     {

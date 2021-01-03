@@ -20,6 +20,9 @@ public class Isis : Player
         skills["perception"] = 12;
         skills["endurance"] = 10;
         bestSkill = KeyByValue(skills, skills.Values.Max());
+        maxHealth = 72;
+        currentHealth = maxHealth;
+        type = "Isis";
     }
 
 }

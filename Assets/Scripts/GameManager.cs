@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (PlayerControl.instance.currentPlayer.getHealth() <= 0)
+        if (PlayerControl.instance.currentPlayer.getCurrentHealth() <= 0)
         {
             PlayerControl.instance.die();
         }

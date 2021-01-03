@@ -11,24 +11,29 @@ public class PlayerControl : MonoBehaviour
     public float speed = 5f;
 
     public Player currentPlayer;
-    public Player isis, horus, anubis;
+    public Isis isis;
+    public Horus horus;
+    public Anubis anubis;
 
     bool isFacingRight = true;
 
-    void Start()
+    private void Awake()
     {
         if (instance == null)
         {
             instance = this;
         }
 
-        body = GetComponent<Rigidbody2D>();
+        isis = GetComponentInChildren<Isis>();
+        horus = GetComponentInChildren<Horus>();
+        anubis = GetComponentInChildren<Anubis>();
 
-        isis = isis.GetComponent<Isis>();
-        horus = horus.GetComponent<Horus>();
-        anubis = anubis.GetComponent<Anubis>();
-        
         currentPlayer = isis;
+    }
+
+    void Start()
+    {
+        body = GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate()

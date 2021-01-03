@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 
 public class Anubis : Player
-{
+{ 
     private void Start()
     {
         isActive = false;
@@ -20,6 +20,9 @@ public class Anubis : Player
         skills["perception"] = 8;
         skills["endurance"] = 14;
         bestSkill = KeyByValue(skills, skills.Values.Max());
+        maxHealth = 80;
+        currentHealth = maxHealth;
+        type = "Anubis";
     }
 
 }

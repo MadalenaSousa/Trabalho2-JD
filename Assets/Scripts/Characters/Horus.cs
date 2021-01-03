@@ -20,7 +20,8 @@ public class Horus : Player
         skills["perception"] = 15;
         skills["endurance"] = 10;
         bestSkill = KeyByValue(skills, skills.Values.Max());
+        maxHealth = 100;
+        currentHealth = maxHealth;
+        type = "Horus";
     }
-
-  
 }
