@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TestItem
   m_EditorClassIdentifier: 
   name: Esfinge Teste
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: a69ca9d700dae5a42a3d339eb466449e, type: 3}

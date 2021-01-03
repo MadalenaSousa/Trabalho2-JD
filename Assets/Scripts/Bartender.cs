@@ -19,7 +19,7 @@ public class Bartender : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if(PlayerControl.instance.currentPlayer.GetComponent<Character2Skills>())
+            if(PlayerControl.instance.currentPlayer.GetComponent<Isis>())
             {
                 FindObjectOfType<DialogueManager>().StartDialogue(bartenderDialogueIsis, bartenderPanel);
             } else
