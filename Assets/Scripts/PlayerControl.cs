@@ -10,14 +10,10 @@ public class PlayerControl : MonoBehaviour
     private float moveInputX, moveInputY;
     public float speed = 5f;
 
-    public GameObject[] players = new GameObject[3];
-    public GameObject currentPlayer;
+    public Player currentPlayer;
+    public Player isis, horus, anubis;
 
     bool isFacingRight = true;
-
-    public int maxHealth = 100;
-    public int currentHealth;
-    public HealthBar healthBar;
 
     void Start()
     {
@@ -27,13 +23,12 @@ public class PlayerControl : MonoBehaviour
         }
 
         body = GetComponent<Rigidbody2D>();
-        players[0].GetComponent<Character1Skills>().enabled = true;
-        players[1].GetComponent<Character2Skills>().enabled = false;
-        players[2].GetComponent<Character3Skills>().enabled = false;
-        currentPlayer = players[0];
 
-        currentHealth = maxHealth;
-        healthBar.setMaxHealth(maxHealth);
+        isis = isis.GetComponent<Isis>();
+        horus = horus.GetComponent<Horus>();
+        anubis = anubis.GetComponent<Anubis>();
+        
+        currentPlayer = isis;
     }
 
     void FixedUpdate()
@@ -57,7 +52,7 @@ public class PlayerControl : MonoBehaviour
                 transform.eulerAngles.y,
                 -90f);
 
-            for(int i = 0; i < 3; i++)
+            for(int i = 0; i < gameObject.transform.childCount; i++)
             {
                 transform.GetChild(i).transform.eulerAngles = new Vector3(
                     transform.eulerAngles.x,
@@ -73,7 +68,7 @@ public class PlayerControl : MonoBehaviour
                 transform.eulerAngles.y,
                 90f);
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < gameObject.transform.childCount; i++)
             {
                 transform.GetChild(i).transform.eulerAngles = new Vector3(
                     transform.eulerAngles.x,
@@ -88,7 +83,7 @@ public class PlayerControl : MonoBehaviour
                 transform.eulerAngles.y,
                 0f);
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < gameObject.transform.childCount; i++)
             {
                 transform.GetChild(i).transform.eulerAngles = new Vector3(
                     transform.eulerAngles.x,
@@ -103,7 +98,7 @@ public class PlayerControl : MonoBehaviour
                 transform.eulerAngles.y,
                 180f);
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < gameObject.transform.childCount; i++)
             {
                 transform.GetChild(i).transform.eulerAngles = new Vector3(
                     transform.eulerAngles.x,
@@ -121,51 +116,31 @@ public class PlayerControl : MonoBehaviour
         transform.localScale = Scaler;
     }
 
-    public void SwitchPlayer(int playerNum)
+    public void SwitchPlayer(Player newPlayer)
     {
-        GameObject prevPlayer = currentPlayer;
+        currentPlayer = newPlayer;
 
-        prevPlayer.transform.position = GameObject.FindGameObjectWithTag("Player" + playerNum).transform.position;
-        prevPlayer.transform.localScale = GameObject.FindGameObjectWithTag("Player" + playerNum).transform.localScale;
-
-        currentPlayer = players[playerNum - 1];
-        currentPlayer.transform.position = new Vector3(transform.position.x, transform.position.y, currentPlayer.transform.position.z);
-        currentPlayer.transform.localScale = new Vector3(0.5f, 0.5f, currentPlayer.transform.localScale.z);
-
-        if(playerNum == 1)
+        if(currentPlayer == isis)
         {
-            players[0].GetComponent<Character1Skills>().enabled = true;
-            players[1].GetComponent<Character2Skills>().enabled = false;
-            players[2].GetComponent<Character3Skills>().enabled = false;
+            isis.setPrimaryPlayerCharacteristics();
+            horus.setSecondaryPlayerCharacteristics(0.5f);
+            anubis.setSecondaryPlayerCharacteristics(-0.5f);
+        } else if(currentPlayer == horus)
+        {
+            horus.setPrimaryPlayerCharacteristics();
+            isis.setSecondaryPlayerCharacteristics(0.5f);
+            anubis.setSecondaryPlayerCharacteristics(-0.5f);
         }
-        else if(playerNum == 2)
+        else if (currentPlayer == anubis)
         {
-            players[1].GetComponent<Character2Skills>().enabled = true;
-            players[0].GetComponent<Character1Skills>().enabled = false;
-            players[2].GetComponent<Character3Skills>().enabled = false;
-        } 
-        else if(playerNum == 3)
-        {
-            players[2].GetComponent<Character3Skills>().enabled = true;
-            players[0].GetComponent<Character1Skills>().enabled = false;
-            players[1].GetComponent<Character2Skills>().enabled = false;
+            anubis.setPrimaryPlayerCharacteristics();
+            isis.setSecondaryPlayerCharacteristics(0.5f);
+            horus.setSecondaryPlayerCharacteristics(-0.5f);
         }
     }
 
-    public void decreaseHealth(int healthValue)
+    public void die()
     {
-        currentHealth -= healthValue;
-        healthBar.setHealth(currentHealth);
-    }
-
-    public int getHealth()
-    {
-        return currentHealth;
-    }
-
-    public void setHealth(int healthToSet)
-    {
-        currentHealth = healthToSet;
-        healthBar.setHealth(currentHealth);
+        Debug.Log("Player died!");
     }
 }
