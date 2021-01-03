@@ -40,6 +40,9 @@ public class ItemPickup : MonoBehaviour
                     Debug.Log("Anubis is Dead");
                     anubis.isDead = false;
                     anubis.setHealth(anubis.getMaxHealth());
+                } else
+                {
+                    Inventory.instance.AddItem(item);
                 }
             } 
             else

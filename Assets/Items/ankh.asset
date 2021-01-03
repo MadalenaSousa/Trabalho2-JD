@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5acdb1b980660a49b5ecece099d49f1, type: 3}
-  m_Name: TestItem
+  m_Name: ankh
   m_EditorClassIdentifier: 
-  name: Esfinge Teste
-  icon: {fileID: 21300000, guid: a69ca9d700dae5a42a3d339eb466449e, type: 3}
+  name: ankh
+  icon: {fileID: 21300000, guid: e3159199e6c614749bf01796767980d3, type: 3}
