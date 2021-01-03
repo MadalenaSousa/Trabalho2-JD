@@ -8,23 +8,18 @@ public class Bartender : MonoBehaviour
 {
     public Dialogue bartenderDialogueOther;
     public Dialogue bartenderDialogueIsis;
-    public GameObject bartenderPanel;
-
-    void Start()
-    {
-        bartenderPanel.SetActive(false);
-    }
+    public Text bartenderText;
 
     void OnMouseOver()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if(PlayerControl.instance.currentPlayer.GetComponent<Character2Skills>())
+            if(PlayerControl.instance.currentPlayer.GetComponent<Isis>())
             {
-                FindObjectOfType<DialogueManager>().StartDialogue(bartenderDialogueIsis, bartenderPanel);
+                FindObjectOfType<DialogueManager>().StartDialogue(bartenderDialogueIsis);
             } else
             {
-                FindObjectOfType<DialogueManager>().StartDialogue(bartenderDialogueOther, bartenderPanel);
+                FindObjectOfType<DialogueManager>().StartDialogue(bartenderDialogueOther);
             }
             
         }

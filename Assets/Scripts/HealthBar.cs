@@ -5,26 +5,39 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider HealthSlider;
-    public int playerMaxValue = 100;
+    public Image isisHealthCircle, horusHealthCircle, anubisHealthCircle;
 
     private void Start()
     {
-        HealthSlider.maxValue = playerMaxValue;
+        isisHealthCircle.fillAmount = PlayerControl.instance.isis.getMaxHealth() / 100;
+        horusHealthCircle.fillAmount = PlayerControl.instance.horus.getMaxHealth() / 100;
+        anubisHealthCircle.fillAmount = PlayerControl.instance.anubis.getMaxHealth() / 100;
     }
 
     private void Update()
     {
-        HealthSlider.value = PlayerControl.instance.currentPlayer.getHealth();
+        setIsisHealth(PlayerControl.instance.isis.getCurrentHealth() / 100);
+        setHorusHealth(PlayerControl.instance.horus.getCurrentHealth() / 100);
+        setAnubisHealth(PlayerControl.instance.anubis.getCurrentHealth() / 100);
     }
 
     public void setToMaxHealth()
     {
-        HealthSlider.value = playerMaxValue;
+        //HealthSlider.value = PlayerControl.instance.currentPlayer.maxHealth;
     }
 
-    public void setHealth(int health)
+    public void setIsisHealth(float health)
     {
-        HealthSlider.value = health;
+        isisHealthCircle.fillAmount = (float)health;
+    }
+
+    public void setHorusHealth(float health)
+    {
+        horusHealthCircle.fillAmount = (float)health;
+    }
+
+    public void setAnubisHealth(float health)
+    {
+        anubisHealthCircle.fillAmount = (float)health;
     }
 }

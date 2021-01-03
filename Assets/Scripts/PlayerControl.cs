@@ -11,24 +11,33 @@ public class PlayerControl : MonoBehaviour
     public float speed = 5f;
 
     public Player currentPlayer;
-    public Player isis, horus, anubis;
+    public Isis isis;
+    public Horus horus;
+    public Anubis anubis;
 
     bool isFacingRight = true;
 
-    void Start()
+    Inventory inventory;
+
+    private void Awake()
     {
         if (instance == null)
         {
             instance = this;
         }
 
-        body = GetComponent<Rigidbody2D>();
+        isis = GetComponentInChildren<Isis>();
+        horus = GetComponentInChildren<Horus>();
+        anubis = GetComponentInChildren<Anubis>();
 
-        isis = isis.GetComponent<Isis>();
-        horus = horus.GetComponent<Horus>();
-        anubis = anubis.GetComponent<Anubis>();
-        
         currentPlayer = isis;
+
+        inventory = Inventory.instance;
+    }
+
+    void Start()
+    {
+        body = GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate()
@@ -141,6 +150,31 @@ public class PlayerControl : MonoBehaviour
 
     public void die()
     {
-        Debug.Log("Player died!");
+        Player[] players = new Player[3];
+        players[0] = isis;
+        players[1] = horus;
+        players[2] = anubis;
+
+        for (int i = 0; i < inventory.items.Count; i++)
+        {
+            if (inventory.items[i].name == "ankh")
+            {
+                inventory.RemoveItem(inventory.items[i]);
+                currentPlayer.setHealth(currentPlayer.getMaxHealth());
+                return;
+            }
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            if (currentPlayer == players[i])
+            {
+                players[i].isDead = true;
+                SwitchPlayer(players[(i + 1) % 3]);
+                currentPlayer.isDead = false;
+                return;
+            }
+        }
+     
     }
 }

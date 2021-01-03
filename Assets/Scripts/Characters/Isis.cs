@@ -5,12 +5,6 @@ using System.Linq;
 
 public class Isis : Player
 {
-    private void Start()
-    {
-        isActive = true;
-        //Debug.Log(gameObject.transform.localPosition);
-    }
-
     public Isis()
     {
         playerName = "Isis";
@@ -20,6 +14,21 @@ public class Isis : Player
         skills["perception"] = 12;
         skills["endurance"] = 10;
         bestSkill = KeyByValue(skills, skills.Values.Max());
+        maxHealth = 72;
+        isDead = false;
+        currentHealth = maxHealth;
+        type = "Isis";
+    }
+
+    private void Update()
+    {
+        if(isDead)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1);
+        } else
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        }
     }
 
 }

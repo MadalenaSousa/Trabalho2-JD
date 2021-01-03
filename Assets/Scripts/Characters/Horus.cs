@@ -5,12 +5,6 @@ using System.Linq;
 
 public class Horus : Player
 {
-    private void Start()
-    {
-        isActive = false;
-        //Debug.Log(gameObject.transform.localPosition);
-    }
-
     public Horus()
     {
         playerName = "Horus";
@@ -20,7 +14,21 @@ public class Horus : Player
         skills["perception"] = 15;
         skills["endurance"] = 10;
         bestSkill = KeyByValue(skills, skills.Values.Max());
+        maxHealth = 100;
+        isDead = false;
+        currentHealth = maxHealth;
+        type = "Horus";
     }
 
-  
+    private void Update()
+    {
+        if (isDead)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        }
+    }
 }
