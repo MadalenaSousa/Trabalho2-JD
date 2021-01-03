@@ -7,17 +7,19 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     public Text dialogueText;
+    public GameObject dialoguePanel;
 
     private Queue<string> sentences;
 
     void Start()
     {
         sentences = new Queue<string>();
+        dialoguePanel.SetActive(false);
     }
 
-    public void StartDialogue(Dialogue dialogue, GameObject panel)
+    public void StartDialogue(Dialogue dialogue)
     {
-        panel.SetActive(true);
+        dialoguePanel.SetActive(true);
         sentences.Clear();
 
         foreach(string sentence in dialogue.sentences)
@@ -25,14 +27,14 @@ public class DialogueManager : MonoBehaviour
             sentences.Enqueue(sentence);
         }
 
-        DisplayNextSentence(panel);
+        DisplayNextSentence();
     }
 
-    public void DisplayNextSentence(GameObject panel)
+    public void DisplayNextSentence()
     {
         if(sentences.Count == 0)
         {
-            panel.SetActive(false);
+            dialoguePanel.SetActive(false);
             return;
         }
 
