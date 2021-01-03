@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Traps : MonoBehaviour
+public class SawContact : MonoBehaviour
 {
     float healthValue = 1f;
 
