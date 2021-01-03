@@ -17,6 +17,8 @@ public class PlayerControl : MonoBehaviour
 
     bool isFacingRight = true;
 
+    Inventory inventory;
+
     private void Awake()
     {
         if (instance == null)
@@ -29,6 +31,8 @@ public class PlayerControl : MonoBehaviour
         anubis = GetComponentInChildren<Anubis>();
 
         currentPlayer = isis;
+
+        inventory = Inventory.instance;
     }
 
     void Start()
@@ -151,15 +155,26 @@ public class PlayerControl : MonoBehaviour
         players[1] = horus;
         players[2] = anubis;
 
+        for (int i = 0; i < inventory.items.Count; i++)
+        {
+            if (inventory.items[i].name == "ankh")
+            {
+                inventory.RemoveItem(inventory.items[i]);
+                currentPlayer.setHealth(currentPlayer.getMaxHealth());
+                return;
+            }
+        }
+
         for (int i = 0; i < 3; i++)
         {
-            if(currentPlayer == players[i])
+            if (currentPlayer == players[i])
             {
                 players[i].isDead = true;
                 SwitchPlayer(players[(i + 1) % 3]);
                 currentPlayer.isDead = false;
-                break;
+                return;
             }
         }
+     
     }
 }
