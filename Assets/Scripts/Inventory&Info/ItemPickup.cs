@@ -18,8 +18,10 @@ public class ItemPickup : MonoBehaviour
 
     void OnMouseOver()
     {
+        Debug.Log("Mouse Over");
         if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log("Mouse Clicked");
             Debug.Log("Picking up " + item.name);
             if (item.name == "ankh")
             {
