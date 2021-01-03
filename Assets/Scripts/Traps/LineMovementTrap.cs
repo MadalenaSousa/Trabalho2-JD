@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingSaws : MonoBehaviour
+public class LineMovementTrap : MonoBehaviour
 {
     public Transform pos1, pos2;
     public float speed;
