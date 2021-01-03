@@ -5,12 +5,6 @@ using System.Linq;
 
 public class Anubis : Player
 { 
-    private void Start()
-    {
-        isActive = false;
-        //Debug.Log(gameObject.transform.localPosition);
-    }
-
     public Anubis()
     {
         playerName = "Anubis";
@@ -21,8 +15,21 @@ public class Anubis : Player
         skills["endurance"] = 14;
         bestSkill = KeyByValue(skills, skills.Values.Max());
         maxHealth = 80;
+        isDead = false;
         currentHealth = maxHealth;
         type = "Anubis";
+    }
+
+    private void Update()
+    {
+        if (isDead)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        }
     }
 
 }

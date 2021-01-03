@@ -146,6 +146,20 @@ public class PlayerControl : MonoBehaviour
 
     public void die()
     {
-        Debug.Log("Player died!");
+        Player[] players = new Player[3];
+        players[0] = isis;
+        players[1] = horus;
+        players[2] = anubis;
+
+        for (int i = 0; i < 3; i++)
+        {
+            if(currentPlayer == players[i])
+            {
+                players[i].isDead = true;
+                SwitchPlayer(players[(i + 1) % 3]);
+                currentPlayer.isDead = false;
+                break;
+            }
+        }
     }
 }
