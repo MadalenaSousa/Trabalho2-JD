@@ -30,13 +30,13 @@ public class Player : MonoBehaviour
     public void setPrimaryPlayerCharacteristics()
     {
         transform.localPosition = new Vector3(0, 0, 1);
-        transform.localScale = new Vector3(0.5f, 0.5f, transform.localScale.z);
+        transform.localScale = new Vector3(0.8f, 0.8f, transform.localScale.z);
     }
 
     public void setSecondaryPlayerCharacteristics(float x)
     {
         transform.localPosition = new Vector3(x, 2, 1);
-        transform.localScale = new Vector3(0.3f, 0.3f, transform.localScale.z);
+        transform.localScale = new Vector3(0.5f, 0.5f, transform.localScale.z);
     }
 
     public float getMaxHealth()
