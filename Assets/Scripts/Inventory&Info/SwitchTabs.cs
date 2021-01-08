@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class SwitchTabs : MonoBehaviour
 {
     public GameObject inventoryPanel, characterInfoPanel, infoMenu;
+    public Sprite chestClosed;
+    public Sprite chestOpen;
 
     private void Start()
     {
@@ -30,13 +32,13 @@ public class SwitchTabs : MonoBehaviour
     {
         if(infoMenu.activeSelf)
         {
-            GetComponentInChildren<Text>().text = "Info";
+            GetComponent<Image>().sprite = chestClosed;
             infoMenu.SetActive(false);
             inventoryPanel.SetActive(false);
             characterInfoPanel.SetActive(false);
         } else
         {
-            GetComponentInChildren<Text>().text = "Close";
+            GetComponent<Image>().sprite = chestOpen;
             infoMenu.SetActive(true);
             inventoryPanel.SetActive(true);
             characterInfoPanel.SetActive(false);
