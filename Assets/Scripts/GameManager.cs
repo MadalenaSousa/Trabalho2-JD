@@ -5,11 +5,13 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public Vector2 lastCheckpoitPos;
+    public Dictionary<string, bool> answers = new Dictionary<string, bool>();
 
     void Start()
     {
@@ -17,6 +19,11 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+
+        answers.Add("wine", false);
+        answers.Add("diary", false);
+        answers.Add("stone", false);
+        answers.Add("clock", false);
 
         lastCheckpoitPos = new Vector2(-7, 2);
     }
@@ -26,6 +33,16 @@ public class GameManager : MonoBehaviour
         if (PlayerControl.instance.currentPlayer.getCurrentHealth() <= 0)
         {
             PlayerControl.instance.die();
+        }
+
+        win();
+    }
+
+    void win()
+    {
+        if(answers["wine"] == true && answers["diary"] == true && answers["stone"] == true && answers["clock"] == true)
+        {
+            SceneManager.LoadScene("Win");
         }
     }
 }

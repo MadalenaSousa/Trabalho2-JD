@@ -29,6 +29,7 @@ public class Sphinx : MonoBehaviour
                     {
                         Debug.Log("Found Solution");
                         FindObjectOfType<DialogueManager>().StartDialogue(sphinxDialogueSolved);
+                        GameManager.instance.answers[solutionItem.name] = true;
                         break;
                     }
                     else
