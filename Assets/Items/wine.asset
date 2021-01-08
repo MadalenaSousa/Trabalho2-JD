@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: wine
   m_EditorClassIdentifier: 
   name: wine
-  icon: {fileID: 21300000, guid: a69ca9d700dae5a42a3d339eb466449e, type: 3}
+  icon: {fileID: 21300000, guid: 6518fd51ca89d034c8148aca73ea8558, type: 3}
