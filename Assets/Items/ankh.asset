@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ankh
   m_EditorClassIdentifier: 
   name: ankh
-  icon: {fileID: 21300000, guid: e3159199e6c614749bf01796767980d3, type: 3}
+  icon: {fileID: 21300000, guid: 5bfad5ec1290ad146937cacdf4830c07, type: 3}
