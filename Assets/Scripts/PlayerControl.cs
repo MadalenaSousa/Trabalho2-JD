@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -170,10 +171,16 @@ public class PlayerControl : MonoBehaviour
             if (currentPlayer == players[i])
             {
                 players[i].isDead = true;
-                SwitchPlayer(players[(i + 1) % 3]);
-                currentPlayer.isDead = false;
+                if(players[(i + 1) % 3].isDead == false)
+                {
+                    SwitchPlayer(players[(i + 1) % 3]);
+                    currentPlayer.isDead = false;
+                }
+                else {
+                    SceneManager.LoadScene("Lose");
+                }
                 return;
-            }
+            }       
         }
      
     }
