@@ -20,36 +20,41 @@ public class ItemPickup : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Picking up " + item.name);
-            if (item.name == "ankh")
+            if(Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, gameObject.transform.position) < 10f)
             {
-                if(isis.isDead)
+                Debug.Log("Picking up " + item.name);
+                if (item.name == "ankh")
                 {
-                    Debug.Log("Isis is Dead");
-                    isis.isDead = false;
-                    isis.setHealth(isis.getMaxHealth());
-                } 
-                else if(horus.isDead)
-                {
-                    Debug.Log("Horus is Dead");
-                    horus.isDead = false;
-                    horus.setHealth(horus.getMaxHealth());
+                    if (isis.isDead)
+                    {
+                        Debug.Log("Isis is Dead");
+                        isis.isDead = false;
+                        isis.setHealth(isis.getMaxHealth());
+                    }
+                    else if (horus.isDead)
+                    {
+                        Debug.Log("Horus is Dead");
+                        horus.isDead = false;
+                        horus.setHealth(horus.getMaxHealth());
+                    }
+                    else if (anubis.isDead)
+                    {
+                        Debug.Log("Anubis is Dead");
+                        anubis.isDead = false;
+                        anubis.setHealth(anubis.getMaxHealth());
+                    }
+                    else
+                    {
+                        Inventory.instance.AddItem(item);
+                    }
                 }
-                else if (anubis.isDead)
-                {
-                    Debug.Log("Anubis is Dead");
-                    anubis.isDead = false;
-                    anubis.setHealth(anubis.getMaxHealth());
-                } else
+                else
                 {
                     Inventory.instance.AddItem(item);
                 }
-            } 
-            else
-            {
-                Inventory.instance.AddItem(item);
-            }              
-            Destroy(gameObject);
+                Destroy(gameObject);
+            }
+            
         }
     }
 }
