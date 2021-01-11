@@ -18,10 +18,8 @@ public class ItemPickup : MonoBehaviour
 
     void OnMouseOver()
     {
-        Debug.Log("Mouse Over");
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Mouse Clicked");
             Debug.Log("Picking up " + item.name);
             if (item.name == "ankh")
             {
@@ -37,7 +35,7 @@ public class ItemPickup : MonoBehaviour
                     horus.isDead = false;
                     horus.setHealth(horus.getMaxHealth());
                 }
-                else if (horus.isDead)
+                else if (anubis.isDead)
                 {
                     Debug.Log("Anubis is Dead");
                     anubis.isDead = false;
