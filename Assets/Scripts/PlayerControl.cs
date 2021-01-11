@@ -151,37 +151,113 @@ public class PlayerControl : MonoBehaviour
 
     public void die()
     {
+        int numberOfAnkhs = GameObject.FindGameObjectsWithTag("Life").Length;
+
+        if (checkAndUseItem("ankh"))
+        {
+            currentPlayer.setHealth(currentPlayer.getMaxHealth());
+        } 
+        else
+        {
+            killThisPlayer(currentPlayer);
+            if (getNextLivingPlayer() == null || numberOfAnkhs < numberOfDeadPlayers())
+            {
+                SceneManager.LoadScene("Lose");
+            }
+            else
+            {
+                SwitchPlayer(getNextLivingPlayer());
+                resurrectThisPlayer(currentPlayer);
+            }
+        }
+     
+    }
+
+    public void killThisPlayer(Player playerToKill)
+    {
         Player[] players = new Player[3];
         players[0] = isis;
         players[1] = horus;
         players[2] = anubis;
 
-        for (int i = 0; i < inventory.items.Count; i++)
+        for (int i = 0; i < players.Length; i++)
         {
-            if (inventory.items[i].name == "ankh")
+            if (players[i] == playerToKill)
             {
-                inventory.RemoveItem(inventory.items[i]);
-                currentPlayer.setHealth(currentPlayer.getMaxHealth());
-                return;
+                players[i].isDead = true;
+            }
+        }
+    }
+
+    public void resurrectThisPlayer(Player playerToResurrect)
+    {
+        Player[] players = new Player[3];
+        players[0] = isis;
+        players[1] = horus;
+        players[2] = anubis;
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i] == playerToResurrect)
+            {
+                players[i].isDead = false;
+            }
+        }
+    }
+
+    public int numberOfDeadPlayers()
+    {
+        Player[] players = new Player[3];
+        players[0] = isis;
+        players[1] = horus;
+        players[2] = anubis;
+
+        int count = 0;
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            if(players[i].isDead)
+            {
+                count++;
             }
         }
 
+        return count;
+    }
+
+    public Player getNextLivingPlayer()
+    {
+        Player[] players = new Player[3];
+        players[0] = isis;
+        players[1] = horus;
+        players[2] = anubis;
+
+        Player nextP = null;
+
         for (int i = 0; i < 3; i++)
         {
-            if (currentPlayer == players[i])
+            if (players[i].isDead == false)
             {
-                players[i].isDead = true;
-                if(players[(i + 1) % 3].isDead == false)
-                {
-                    SwitchPlayer(players[(i + 1) % 3]);
-                    currentPlayer.isDead = false;
-                }
-                else {
-                    SceneManager.LoadScene("Lose");
-                }
-                return;
-            }       
+                nextP = players[i];
+            } 
         }
-     
+
+        return nextP;
+    }
+
+    public bool checkAndUseItem(string itemName)
+    {
+        bool exists = false;
+
+        for (int i = 0; i < inventory.items.Count; i++)
+        {
+            if (inventory.items[i].name == itemName)
+            {
+                inventory.RemoveItem(inventory.items[i]);
+                exists = true;
+            }
+        }
+
+        return exists;
     }
 }

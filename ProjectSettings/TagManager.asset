@@ -4,11 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Player1
-  - Player2
-  - Player3
-  - Door1
   - Dialogue
+  - Life
+  - Isis
+  - Horus
+  - Anubis
   layers:
   - Default
   - TransparentFX
