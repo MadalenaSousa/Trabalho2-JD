@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public Vector2 lastCheckpoitPos;
     public Dictionary<string, bool> answers = new Dictionary<string, bool>();
+    public float contactDistance = 10f;
 
     void Start()
     {
@@ -50,7 +51,7 @@ public class GameManager : MonoBehaviour
     {
         bool isClose = false;
 
-        if(Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, objectToCheck.transform.position) < 10f)
+        if(Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, objectToCheck.transform.position) < contactDistance)
         {
             isClose = true;
         }
