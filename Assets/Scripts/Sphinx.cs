@@ -9,10 +9,12 @@ public class Sphinx : MonoBehaviour
     public Dialogue sphinxDialogueSolved;
     Inventory inventory;
     public Item solutionItem;
+    bool solved;
 
     void Start()
     {
         inventory = Inventory.instance;
+        solved = false;
     }
 
     void OnMouseOver()
@@ -30,12 +32,21 @@ public class Sphinx : MonoBehaviour
                         Debug.Log("Found Solution");
                         FindObjectOfType<DialogueManager>().StartDialogue(sphinxDialogueSolved);
                         GameManager.instance.answers[solutionItem.name] = true;
+                        inventory.RemoveItem(inventory.items[i]);
+                        solved = true;
                         break;
                     }
                     else
                     {
-                        Debug.Log("No Solution and Inventory not empty");
-                        FindObjectOfType<DialogueManager>().StartDialogue(sphinxDialogueUnsolved);
+                        if(solved)
+                        {
+                            Debug.Log("No Solution and Inventory not empty");
+                            FindObjectOfType<DialogueManager>().StartDialogue(sphinxDialogueSolved);
+                        } else
+                        {
+                            Debug.Log("No Solution and Inventory not empty");
+                            FindObjectOfType<DialogueManager>().StartDialogue(sphinxDialogueUnsolved);
+                        }
                     }
                 }
             }

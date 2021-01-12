@@ -45,4 +45,16 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("Win");
         }
     }
+
+    public bool checkPlayerProximityToObject(GameObject objectToCheck)
+    {
+        bool isClose = false;
+
+        if(Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, objectToCheck.transform.position) < 10f)
+        {
+            isClose = true;
+        }
+
+        return isClose;
+    }
 }

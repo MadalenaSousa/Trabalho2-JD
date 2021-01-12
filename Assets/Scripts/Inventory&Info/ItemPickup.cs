@@ -20,39 +20,42 @@ public class ItemPickup : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if(Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, gameObject.transform.position) < 10f)
+            if(GameManager.instance.checkPlayerProximityToObject(gameObject))
             {
                 Debug.Log("Picking up " + item.name);
                 if (item.name == "ankh")
                 {
                     if (isis.isDead)
                     {
-                        Debug.Log("Isis is Dead");
-                        isis.isDead = false;
-                        isis.setHealth(isis.getMaxHealth());
+                        PlayerControl.instance.resurrectThisPlayer(isis);
                     }
                     else if (horus.isDead)
                     {
-                        Debug.Log("Horus is Dead");
-                        horus.isDead = false;
-                        horus.setHealth(horus.getMaxHealth());
+                        PlayerControl.instance.resurrectThisPlayer(horus);
                     }
                     else if (anubis.isDead)
                     {
-                        Debug.Log("Anubis is Dead");
-                        anubis.isDead = false;
-                        anubis.setHealth(anubis.getMaxHealth());
+                        PlayerControl.instance.resurrectThisPlayer(anubis);
                     }
                     else
                     {
                         Inventory.instance.AddItem(item);
                     }
+                    Destroy(gameObject);
                 }
                 else
                 {
-                    Inventory.instance.AddItem(item);
+                    if(item.canPickup)
+                    {
+                        Inventory.instance.AddItem(item);
+                        Destroy(gameObject);
+                    } else
+                    {
+                        Debug.Log("Didn't pass the guardian!");
+                    }
+                   
                 }
-                Destroy(gameObject);
+                
             }
             
         }
