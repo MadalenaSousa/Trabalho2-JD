@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public Vector2 lastCheckpoitPos;
     public Dictionary<string, bool> answers = new Dictionary<string, bool>();
+    public float contactDistance = 10f;
 
     void Start()
     {
@@ -44,5 +45,17 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("Win");
         }
+    }
+
+    public bool checkPlayerProximityToObject(GameObject objectToCheck)
+    {
+        bool isClose = false;
+
+        if(Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, objectToCheck.transform.position) < contactDistance)
+        {
+            isClose = true;
+        }
+
+        return isClose;
     }
 }

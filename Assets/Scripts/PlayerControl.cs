@@ -201,6 +201,7 @@ public class PlayerControl : MonoBehaviour
             if (players[i] == playerToResurrect)
             {
                 players[i].isDead = false;
+                players[i].setHealth(players[i].getMaxHealth()); //Should we set it to their specific max health or to the absolute max health?
             }
         }
     }
@@ -259,5 +260,25 @@ public class PlayerControl : MonoBehaviour
         }
 
         return exists;
+    }
+
+    public Player checkCurrentPlayerSubClass()
+    {
+        Player[] players = new Player[3];
+        players[0] = isis;
+        players[1] = horus;
+        players[2] = anubis;
+
+        Player currentPlayerSubClass = players[0];
+
+        for(int i = 0; i < players.Length; i++)
+        {
+            if(currentPlayer == players[i])
+            {
+                currentPlayerSubClass = players[i];
+            }
+        }
+
+        return currentPlayerSubClass;
     }
 }
