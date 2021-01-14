@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
     {
         if(answers["wine"] == true && answers["diary"] == true && answers["stone"] == true && answers["clock"] == true)
         {
-            //SceneManager.LoadScene("Win");
             hasAllAnswers = true;
         }
     }
