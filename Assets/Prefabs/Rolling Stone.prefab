@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 3120609366389815186}
   - component: {fileID: 3120609366389815181}
   - component: {fileID: 3120609366389815184}
-  - component: {fileID: 3120609366389815187}
+  - component: {fileID: 4650602133543387105}
   m_Layer: 0
   m_Name: Stone
   m_TagString: Untagged
@@ -203,13 +203,13 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.034661155, y: -0.079006724}
   serializedVersion: 2
   m_Radius: 2.643076
---- !u!114 &3120609366389815187
+--- !u!114 &4650602133543387105
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -218,6 +218,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3120609366389815183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bf729b6ca2fc6c439df48e52d3fda6d, type: 3}
+  m_Script: {fileID: 11500000, guid: c6cac9ba085cb524f9a4a9ed370150d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

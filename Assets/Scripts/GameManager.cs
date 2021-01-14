@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public Vector2 lastCheckpoitPos;
     public Dictionary<string, bool> answers = new Dictionary<string, bool>();
     public float contactDistance = 10f;
+    public bool hasAllAnswers = false;
 
     void Start()
     {
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
     {
         if(answers["wine"] == true && answers["diary"] == true && answers["stone"] == true && answers["clock"] == true)
         {
-            SceneManager.LoadScene("Win");
+            hasAllAnswers = true;
         }
     }
 
