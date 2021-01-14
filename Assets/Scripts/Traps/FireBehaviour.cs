@@ -19,9 +19,9 @@ public class FireBehaviour : MonoBehaviour
     
     void Update()
     {
-        if (Time.time > startTime)
+        if (Time.timeSinceLevelLoad > startTime)
         {
-            startTime = Time.time + fireInterval;
+            startTime = Time.timeSinceLevelLoad + fireInterval;
 
             switchState = !switchState;
         }
