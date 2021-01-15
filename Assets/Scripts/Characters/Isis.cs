@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public class Isis : Player
 {
+    public Button isisButton;
+
     public Isis()
     {
         playerName = "Isis";
@@ -25,9 +28,11 @@ public class Isis : Player
         if(isDead)
         {
             GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1);
+            isisButton.interactable = false;
         } else
         {
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+            isisButton.interactable = true;
         }
     }
 

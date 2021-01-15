@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 731729813050785963}
   - component: {fileID: 731729813050785964}
   - component: {fileID: 731729813050785965}
+  - component: {fileID: 8764537780743599626}
   m_Layer: 0
   m_Name: ankh
   m_TagString: Life
@@ -112,3 +113,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 050df98f9cc6b2b4b91ce0c3a1259171, type: 2}
+--- !u!95 &8764537780743599626
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731729813050785966}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cc5c59fb7f9023547ae3617df6f867ca, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

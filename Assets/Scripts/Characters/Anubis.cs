@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public class Anubis : Player
-{ 
+{
+    public Button anubisButton;
+
     public Anubis()
     {
         playerName = "Anubis";
@@ -25,10 +28,12 @@ public class Anubis : Player
         if (isDead)
         {
             GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1);
+            anubisButton.interactable = false;
         }
         else
         {
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+            anubisButton.interactable = true;
         }
     }
 

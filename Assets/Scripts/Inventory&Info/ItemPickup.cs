@@ -8,12 +8,27 @@ public class ItemPickup : MonoBehaviour
     Isis isis;
     Horus horus;
     Anubis anubis;
+    SpriteRenderer thisObjectSprite;
 
     private void Start()
     {
         isis = PlayerControl.instance.isis;
         horus = PlayerControl.instance.horus;
         anubis = PlayerControl.instance.anubis;
+
+        thisObjectSprite = gameObject.GetComponent<SpriteRenderer>();
+    }
+
+    private void Update()
+    {
+        if(GameManager.instance.checkPlayerProximityToObject(gameObject))
+        {
+            Debug.Log("SHINE OBJECT");
+        }
+        else
+        {
+            Debug.Log("DONT SHINE OBJECT");
+        }
     }
 
     void OnMouseOver()
