@@ -36,12 +36,14 @@ public class SwitchTabs : MonoBehaviour
             infoMenu.SetActive(false);
             inventoryPanel.SetActive(false);
             characterInfoPanel.SetActive(false);
+            Time.timeScale = 1;
         } else
         {
             GetComponent<Image>().sprite = chestOpen;
             infoMenu.SetActive(true);
             inventoryPanel.SetActive(true);
             characterInfoPanel.SetActive(false);
+            Time.timeScale = 0;
         }
         
     }
