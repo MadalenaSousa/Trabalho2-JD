@@ -19,4 +19,9 @@ public class StartMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Start");
     }
+
+    public void stopAllSounds()
+    {
+        AudioListener.pause = !AudioListener.pause;
+    }
 }
