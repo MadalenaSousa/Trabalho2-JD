@@ -20,6 +20,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         dialoguePanel.SetActive(true);
+        Time.timeScale = 0;
         sentences.Clear();
 
         foreach(string sentence in dialogue.sentences)
@@ -35,6 +36,7 @@ public class DialogueManager : MonoBehaviour
         if(sentences.Count == 0)
         {
             dialoguePanel.SetActive(false);
+            Time.timeScale = 1;
             return;
         }
 
