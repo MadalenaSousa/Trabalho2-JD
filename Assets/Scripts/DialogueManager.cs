@@ -8,12 +8,15 @@ public class DialogueManager : MonoBehaviour
 {
     public Text dialogueText;
     public GameObject dialoguePanel;
+    public Image speaker;
 
     private Queue<string> sentences;
+    private Queue<Sprite> icons;
 
     void Start()
     {
         sentences = new Queue<string>();
+        icons = new Queue<Sprite>();
         dialoguePanel.SetActive(false);
     }
 
@@ -26,6 +29,11 @@ public class DialogueManager : MonoBehaviour
         foreach(string sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
+        }
+
+        foreach (Sprite icon in dialogue.icon)
+        {
+            icons.Enqueue(icon);
         }
 
         DisplayNextSentence();
@@ -42,5 +50,15 @@ public class DialogueManager : MonoBehaviour
 
         string sentence = sentences.Dequeue();
         dialogueText.text = sentence;
+
+        if(icons.Count > 0)
+        {
+            Sprite icon = icons.Dequeue();
+            speaker.sprite = icon;
+        }
+        else
+        {
+            speaker.sprite = null;
+        }
     }
 }

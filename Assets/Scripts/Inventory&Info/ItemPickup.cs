@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemPickup : MonoBehaviour
 {
@@ -8,7 +9,15 @@ public class ItemPickup : MonoBehaviour
     Isis isis;
     Horus horus;
     Anubis anubis;
-    SpriteRenderer thisObjectSprite;
+    Sprite normalSprite;
+    public Sprite glowSprite;
+
+    public GameObject objectDetailPanel;
+    public Image panelImage;
+    public Text panelText;
+    public Sprite objectImage;
+    [TextArea(2, 10)]
+    public string objectDescription;
 
     private void Start()
     {
@@ -16,18 +25,38 @@ public class ItemPickup : MonoBehaviour
         horus = PlayerControl.instance.horus;
         anubis = PlayerControl.instance.anubis;
 
-        thisObjectSprite = gameObject.GetComponent<SpriteRenderer>();
+        normalSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+
+        objectDetailPanel.SetActive(false); ;
+
+        if(item.name == "ankh")
+        {
+            item.canPickup = true;
+        } 
+        else
+        {
+            item.canPickup = false;
+        }
     }
 
     private void Update()
     {
-        if(GameManager.instance.checkPlayerProximityToObject(gameObject))
+        if(GameManager.instance.checkPlayerProximityToObject(gameObject) && item.canPickup)
         {
-            Debug.Log("SHINE OBJECT");
+            gameObject.GetComponent<SpriteRenderer>().sprite = glowSprite;
         }
         else
         {
-            Debug.Log("DONT SHINE OBJECT");
+            gameObject.GetComponent<SpriteRenderer>().sprite = normalSprite;
+        }
+
+        if(!item.canPickup)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1);
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1);
         }
     }
 
@@ -42,18 +71,25 @@ public class ItemPickup : MonoBehaviour
                 {
                     if (isis.isDead)
                     {
+                        //Animação de ressuscitar
+                        //Info acerca do número de vidas que ainda tem
                         PlayerControl.instance.resurrectThisPlayer(isis);
                     }
                     else if (horus.isDead)
                     {
+                        //Animação de ressuscitar
+                        //Info acerca do número de vidas que ainda tem
                         PlayerControl.instance.resurrectThisPlayer(horus);
                     }
                     else if (anubis.isDead)
                     {
+                        //Animação de ressuscitar
+                        //Info acerca do número de vidas que ainda tem
                         PlayerControl.instance.resurrectThisPlayer(anubis);
                     }
                     else
                     {
+                        //Animação do inventário
                         Inventory.instance.AddItem(item);
                     }
                     Destroy(gameObject);
@@ -62,7 +98,11 @@ public class ItemPickup : MonoBehaviour
                 {
                     if(item.canPickup)
                     {
+                        objectDetailPanel.SetActive(true);
                         Inventory.instance.AddItem(item);
+                        panelImage.sprite = objectImage;
+                        panelText.text = objectDescription;
+                        //Inventory Animation
                         Destroy(gameObject);
                     } else
                     {
