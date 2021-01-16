@@ -24,4 +24,9 @@ public class StartMenu : MonoBehaviour
     {
         AudioListener.pause = !AudioListener.pause;
     }
+
+    public void closePanel(GameObject panel)
+    {
+        panel.SetActive(false);
+    }
 }

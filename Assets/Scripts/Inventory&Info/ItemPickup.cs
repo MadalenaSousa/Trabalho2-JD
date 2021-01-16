@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemPickup : MonoBehaviour
 {
@@ -11,6 +12,13 @@ public class ItemPickup : MonoBehaviour
     Sprite normalSprite;
     public Sprite glowSprite;
 
+    public GameObject objectDetailPanel;
+    public Image panelImage;
+    public Text panelText;
+    public Sprite objectImage;
+    [TextArea(2, 10)]
+    public string objectDescription;
+
     private void Start()
     {
         isis = PlayerControl.instance.isis;
@@ -18,6 +26,8 @@ public class ItemPickup : MonoBehaviour
         anubis = PlayerControl.instance.anubis;
 
         normalSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+
+        objectDetailPanel.SetActive(false); ;
     }
 
     private void Update()
@@ -70,8 +80,10 @@ public class ItemPickup : MonoBehaviour
                 {
                     if(item.canPickup)
                     {
+                        objectDetailPanel.SetActive(true);
                         Inventory.instance.AddItem(item);
-                        //Activate Panel
+                        panelImage.sprite = objectImage;
+                        panelText.text = objectDescription;
                         //Inventory Animation
                         Destroy(gameObject);
                     } else
