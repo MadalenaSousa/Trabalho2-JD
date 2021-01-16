@@ -5,8 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class Dialogue
 {
-    public string name;
+    public string startingSpeaker;
 
     [TextArea(2, 10)]
     public string[] sentences;
+
+    public Sprite[] icon;
 }
