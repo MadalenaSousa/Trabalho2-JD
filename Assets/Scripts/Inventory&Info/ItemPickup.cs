@@ -8,7 +8,8 @@ public class ItemPickup : MonoBehaviour
     Isis isis;
     Horus horus;
     Anubis anubis;
-    SpriteRenderer thisObjectSprite;
+    Sprite normalSprite;
+    public Sprite glowSprite;
 
     private void Start()
     {
@@ -16,18 +17,18 @@ public class ItemPickup : MonoBehaviour
         horus = PlayerControl.instance.horus;
         anubis = PlayerControl.instance.anubis;
 
-        thisObjectSprite = gameObject.GetComponent<SpriteRenderer>();
+        normalSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
     }
 
     private void Update()
     {
         if(GameManager.instance.checkPlayerProximityToObject(gameObject))
         {
-            Debug.Log("SHINE OBJECT");
+            gameObject.GetComponent<SpriteRenderer>().sprite = glowSprite;
         }
         else
         {
-            Debug.Log("DONT SHINE OBJECT");
+            gameObject.GetComponent<SpriteRenderer>().sprite = normalSprite;
         }
     }
 
@@ -42,18 +43,25 @@ public class ItemPickup : MonoBehaviour
                 {
                     if (isis.isDead)
                     {
+                        //Animação de ressuscitar
+                        //Info acerca do número de vidas que ainda tem
                         PlayerControl.instance.resurrectThisPlayer(isis);
                     }
                     else if (horus.isDead)
                     {
+                        //Animação de ressuscitar
+                        //Info acerca do número de vidas que ainda tem
                         PlayerControl.instance.resurrectThisPlayer(horus);
                     }
                     else if (anubis.isDead)
                     {
+                        //Animação de ressuscitar
+                        //Info acerca do número de vidas que ainda tem
                         PlayerControl.instance.resurrectThisPlayer(anubis);
                     }
                     else
                     {
+                        //Animação do inventário
                         Inventory.instance.AddItem(item);
                     }
                     Destroy(gameObject);
@@ -63,6 +71,8 @@ public class ItemPickup : MonoBehaviour
                     if(item.canPickup)
                     {
                         Inventory.instance.AddItem(item);
+                        //Activate Panel
+                        //Inventory Animation
                         Destroy(gameObject);
                     } else
                     {
