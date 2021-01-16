@@ -28,17 +28,35 @@ public class ItemPickup : MonoBehaviour
         normalSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
 
         objectDetailPanel.SetActive(false); ;
+
+        if(item.name == "ankh")
+        {
+            item.canPickup = true;
+        } 
+        else
+        {
+            item.canPickup = false;
+        }
     }
 
     private void Update()
     {
-        if(GameManager.instance.checkPlayerProximityToObject(gameObject))
+        if(GameManager.instance.checkPlayerProximityToObject(gameObject) && item.canPickup)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = glowSprite;
         }
         else
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = normalSprite;
+        }
+
+        if(!item.canPickup)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1);
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 1);
         }
     }
 
