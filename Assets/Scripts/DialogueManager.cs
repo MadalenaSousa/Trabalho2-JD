@@ -8,6 +8,7 @@ public class DialogueManager : MonoBehaviour
 {
     public Text dialogueText;
     public GameObject dialoguePanel;
+    public Image speaker;
 
     private Queue<string> sentences;
 
