@@ -46,10 +46,12 @@ public class PlayerControl : MonoBehaviour
 
     void FixedUpdate()
     {
+        //MOVE PLAYERS
         moveInputX = Input.GetAxis("Horizontal");
         moveInputY = Input.GetAxis("Vertical");
         body.velocity = new Vector2(moveInputX * speed, moveInputY * speed);
 
+        //TURN PLAYERS
         if(isFacingRight && moveInputX < 0)
         {
             FlipHorizontal();
@@ -162,7 +164,7 @@ public class PlayerControl : MonoBehaviour
             leftOverAnkhs = 0;
         }
 
-        if (checkAndUseItem("ankh"))
+        if (checkAndUseItem("ankh")) //If there's a ankh in invetory -> use it
         {
             warningPanel.SetActive(true);
             warningPanel.GetComponentInChildren<Text>().text = "Oh no! Your character just died! Thank god you had an ankh on your Inventory! Be carefull, you now only have " + leftOverAnkhs + " ankhs available and you need all players alive to pass this level!";
@@ -171,12 +173,12 @@ public class PlayerControl : MonoBehaviour
         else
         {
             killThisPlayer(currentPlayer);
-            if (getNextLivingPlayer() == null || numberOfAnkhs < numberOfDeadPlayers())
+            if (getNextLivingPlayer() == null || numberOfAnkhs < numberOfDeadPlayers()) //lose conditions
             {
                 //Lose sound
                 SceneManager.LoadScene("Lose");
             }
-            else
+            else //switch to a living player
             {
                 warningPanel.SetActive(true);
                 warningPanel.GetComponentInChildren<Text>().text = "Oh no! Your character just died! You need to find an ankh to ressurrect it! Be carefull, you now only have " + numberOfAnkhs + " ankhs available and you need all players alive to pass this level!";
@@ -185,6 +187,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
+        //Reposition players in last checkpoint
         transform.position = new Vector3(GameManager.instance.lastCheckpoitPos.x, GameManager.instance.lastCheckpoitPos.y, PlayerControl.instance.transform.position.z);
     }
 

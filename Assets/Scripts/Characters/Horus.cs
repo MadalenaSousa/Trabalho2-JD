@@ -10,13 +10,17 @@ public class Horus : Player
 
     public Horus()
     {
+        //DEFINE HORUS TRAITS
         playerName = "Horus";
+
         skills["strength"] = 12;
         skills["charisma"] = 8;
         skills["intelligence"] = 14;
         skills["perception"] = 15;
         skills["endurance"] = 10;
+
         bestSkill = KeyByValue(skills, skills.Values.Max());
+
         maxHealth = 100;
         isDead = false;
         currentHealth = maxHealth;
@@ -25,6 +29,7 @@ public class Horus : Player
 
     private void Update()
     {
+        //Switch to ghost mode if dead
         if (isDead)
         {
             GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1);

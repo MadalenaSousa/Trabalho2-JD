@@ -32,11 +32,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        //Continuous check of player's health
         if (PlayerControl.instance.currentPlayer.getCurrentHealth() <= 0)
         {
             PlayerControl.instance.die();
         }
 
+        //Continuous check of win conditions
         win();
     }
 
