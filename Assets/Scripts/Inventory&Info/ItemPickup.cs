@@ -69,29 +69,32 @@ public class ItemPickup : MonoBehaviour
                 Debug.Log("Picking up " + item.name);
                 if (item.name == "ankh")
                 {
+                    int numOfLifes = GameObject.FindGameObjectsWithTag("Life").Length;
                     if (isis.isDead)
                     {
-                        //Animação de ressuscitar
-                        //Info acerca do número de vidas que ainda tem
+                        //Som de ressuscitar
+                        panelText.text = "You found and Ankh! This will ressurrect Isis! But be carefull, now you have " + getNumOfLifes().ToString() + " lifes available and you need to have all players alive to pass this level!";
                         PlayerControl.instance.resurrectThisPlayer(isis);
                     }
                     else if (horus.isDead)
                     {
-                        //Animação de ressuscitar
-                        //Info acerca do número de vidas que ainda tem
+                        //Som de ressuscitar
+                        panelText.text = "You found and Ankh! This will ressurrect Horus! But be carefull, now you have " + getNumOfLifes().ToString() + " lifes available and you need to have all players alive to pass this level!";
                         PlayerControl.instance.resurrectThisPlayer(horus);
                     }
                     else if (anubis.isDead)
                     {
-                        //Animação de ressuscitar
-                        //Info acerca do número de vidas que ainda tem
+                        //Som de ressuscitar
+                        panelText.text = "You found and Ankh! This will ressurrect Anubis! But be carefull, now you have " + getNumOfLifes().ToString() + " lifes available and you need to have all players alive to pass this level!";
                         PlayerControl.instance.resurrectThisPlayer(anubis);
                     }
                     else
                     {
-                        //Animação do inventário
+                        //Som de Adicionar ao Inventário?
+                        panelText.text = objectDescription;
                         Inventory.instance.AddItem(item);
                     }
+                    objectDetailPanel.SetActive(true);
                     Destroy(gameObject);
                 }
                 else
@@ -102,7 +105,6 @@ public class ItemPickup : MonoBehaviour
                         Inventory.instance.AddItem(item);
                         panelImage.sprite = objectImage;
                         panelText.text = objectDescription;
-                        //Inventory Animation
                         Destroy(gameObject);
                     } else
                     {
@@ -114,5 +116,18 @@ public class ItemPickup : MonoBehaviour
             }
             
         }
+    }
+
+    public int getNumOfLifes()
+    {
+        int numOfLifes = GameObject.FindGameObjectsWithTag("Life").Length;
+        int leftOverLifes = numOfLifes - 1; ;
+
+        if(numOfLifes == 0)
+        {
+            leftOverLifes = 0;
+        }
+
+        return leftOverLifes;
     }
 }
