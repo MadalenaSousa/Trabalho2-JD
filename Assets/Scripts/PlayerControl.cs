@@ -184,7 +184,8 @@ public class PlayerControl : MonoBehaviour
                 resurrectThisPlayer(currentPlayer);
             }
         }
-     
+
+        transform.position = new Vector3(GameManager.instance.lastCheckpoitPos.x, GameManager.instance.lastCheckpoitPos.y, PlayerControl.instance.transform.position.z);
     }
 
     public void killThisPlayer(Player playerToKill)

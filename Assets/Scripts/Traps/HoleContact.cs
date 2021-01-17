@@ -9,7 +9,6 @@ public class HoleContact : MonoBehaviour
         if (info.gameObject.tag == "Player")
         {
             PlayerControl.instance.currentPlayer.setHealth(0);
-            PlayerControl.instance.transform.position = new Vector3(GameManager.instance.lastCheckpoitPos.x, GameManager.instance.lastCheckpoitPos.y, PlayerControl.instance.transform.position.z);
         }
     }
 }
