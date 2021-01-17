@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: clock
   m_EditorClassIdentifier: 
   name: clock
-  icon: {fileID: 21300000, guid: a69ca9d700dae5a42a3d339eb466449e, type: 3}
+  icon: {fileID: 21300000, guid: 9df9ae710d416524c990f1aa25317fe0, type: 3}
   solutionSkill: strength
   canPickup: 0
