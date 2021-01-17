@@ -296,4 +296,21 @@ public class PlayerControl : MonoBehaviour
 
         return currentPlayerSubClass;
     }
+
+    public bool checkIfAllPlayersAreAlive()
+    {
+        bool areAllAlive = true;
+
+        Player[] players = new Player[3];
+        players[0] = isis;
+        players[1] = horus;
+        players[2] = anubis;
+
+        if(isis.isDead || anubis.isDead || horus.isDead)
+        {
+            areAllAlive = false;
+        }
+
+        return areAllAlive;
+    }
 }
