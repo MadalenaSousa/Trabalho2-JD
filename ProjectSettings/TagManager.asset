@@ -10,6 +10,7 @@ TagManager:
   - Horus
   - Anubis
   - Fire
+  - ChestButton
   layers:
   - Default
   - TransparentFX

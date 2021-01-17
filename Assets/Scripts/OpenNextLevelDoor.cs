@@ -10,7 +10,7 @@ public class OpenNextLevelDoor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D info)
     {
-        if (info.gameObject.tag == "Player" && GameManager.instance.hasAllAnswers)
+        if (info.gameObject.tag == "Player" && GameManager.instance.hasAllAnswers && PlayerControl.instance.checkIfAllPlayersAreAlive())
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = doorOpen;
             StartCoroutine(ExecuteAfterTime(3));

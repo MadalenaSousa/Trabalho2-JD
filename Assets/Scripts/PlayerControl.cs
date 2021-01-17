@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PlayerControl : MonoBehaviour
@@ -19,6 +20,8 @@ public class PlayerControl : MonoBehaviour
     bool isFacingRight = true;
 
     Inventory inventory;
+
+    public GameObject warningPanel;
 
     private void Awake()
     {
@@ -152,9 +155,17 @@ public class PlayerControl : MonoBehaviour
     public void die()
     {
         int numberOfAnkhs = GameObject.FindGameObjectsWithTag("Life").Length;
+        int leftOverAnkhs = numberOfAnkhs - 1;
+        
+        if(numberOfAnkhs == 0)
+        {
+            leftOverAnkhs = 0;
+        }
 
         if (checkAndUseItem("ankh"))
         {
+            warningPanel.SetActive(true);
+            warningPanel.GetComponentInChildren<Text>().text = "Oh no! Your character just died! Thank god you had an ankh on your Inventory! Be carefull, you now only have " + leftOverAnkhs + " ankhs available and you need all players alive to pass this level!";
             currentPlayer.setHealth(currentPlayer.getMaxHealth());
         } 
         else
@@ -162,15 +173,19 @@ public class PlayerControl : MonoBehaviour
             killThisPlayer(currentPlayer);
             if (getNextLivingPlayer() == null || numberOfAnkhs < numberOfDeadPlayers())
             {
+                //Lose sound
                 SceneManager.LoadScene("Lose");
             }
             else
             {
+                warningPanel.SetActive(true);
+                warningPanel.GetComponentInChildren<Text>().text = "Oh no! Your character just died! You need to find an ankh to ressurrect it! Be carefull, you now only have " + numberOfAnkhs + " ankhs available and you need all players alive to pass this level!";
                 SwitchPlayer(getNextLivingPlayer());
                 resurrectThisPlayer(currentPlayer);
             }
         }
-     
+
+        transform.position = new Vector3(GameManager.instance.lastCheckpoitPos.x, GameManager.instance.lastCheckpoitPos.y, PlayerControl.instance.transform.position.z);
     }
 
     public void killThisPlayer(Player playerToKill)
@@ -280,5 +295,22 @@ public class PlayerControl : MonoBehaviour
         }
 
         return currentPlayerSubClass;
+    }
+
+    public bool checkIfAllPlayersAreAlive()
+    {
+        bool areAllAlive = true;
+
+        Player[] players = new Player[3];
+        players[0] = isis;
+        players[1] = horus;
+        players[2] = anubis;
+
+        if(isis.isDead || anubis.isDead || horus.isDead)
+        {
+            areAllAlive = false;
+        }
+
+        return areAllAlive;
     }
 }
