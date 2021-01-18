@@ -140,17 +140,20 @@ public class PlayerControl : MonoBehaviour
             isis.setPrimaryPlayerCharacteristics();
             horus.setSecondaryPlayerCharacteristics(0.5f);
             anubis.setSecondaryPlayerCharacteristics(-0.5f);
+            isis.isDead = false;
         } else if(currentPlayer == horus)
         {
             horus.setPrimaryPlayerCharacteristics();
             isis.setSecondaryPlayerCharacteristics(0.5f);
             anubis.setSecondaryPlayerCharacteristics(-0.5f);
+            horus.isDead = false;
         }
         else if (currentPlayer == anubis)
         {
             anubis.setPrimaryPlayerCharacteristics();
             isis.setSecondaryPlayerCharacteristics(0.5f);
             horus.setSecondaryPlayerCharacteristics(-0.5f);
+            anubis.isDead = false;
         }
     }
 
@@ -183,7 +186,7 @@ public class PlayerControl : MonoBehaviour
                 warningPanel.SetActive(true);
                 warningPanel.GetComponentInChildren<Text>().text = "Oh no! Your character just died! You need to find an ankh to ressurrect it! Be carefull, you now only have " + numberOfAnkhs + " ankhs available and you need all players alive to pass this level!";
                 SwitchPlayer(getNextLivingPlayer());
-                resurrectThisPlayer(currentPlayer);
+                //resurrectThisPlayer(currentPlayer);
             }
         }
 
