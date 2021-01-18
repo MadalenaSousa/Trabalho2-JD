@@ -23,6 +23,8 @@ public class PlayerControl : MonoBehaviour
 
     public GameObject warningPanel;
 
+    public Animator isisAnimator, horusAnimator, anubisAnimator;
+
     private void Awake()
     {
         if (instance == null)
@@ -33,6 +35,10 @@ public class PlayerControl : MonoBehaviour
         isis = GetComponentInChildren<Isis>();
         horus = GetComponentInChildren<Horus>();
         anubis = GetComponentInChildren<Anubis>();
+
+        isisAnimator = isis.GetComponent<Animator>();
+        horusAnimator = horus.GetComponent<Animator>();
+        anubisAnimator = anubis.GetComponent<Animator>();
 
         currentPlayer = isis;
 
@@ -59,6 +65,16 @@ public class PlayerControl : MonoBehaviour
         {
             FlipHorizontal();
         }
+
+        Debug.Log(moveInputY);
+        isisAnimator.SetFloat("ySpeed", moveInputY);
+        isisAnimator.SetFloat("xSpeed", Mathf.Abs(moveInputX));
+
+        horusAnimator.SetFloat("ySpeed", moveInputY);
+        horusAnimator.SetFloat("xSpeed", Mathf.Abs(moveInputX));
+
+        anubisAnimator.SetFloat("ySpeed", moveInputY);
+        anubisAnimator.SetFloat("xSpeed", Mathf.Abs(moveInputX));
 
         if (moveInputX < 0)
         {
