@@ -19,6 +19,9 @@ public class ItemPickup : MonoBehaviour
     [TextArea(2, 10)]
     public string objectDescription;
 
+    private string pathToPickUpSound = "pickingUpItem";
+    private AudioClip pickUpItemClip;
+
     private void Start()
     {
         isis = PlayerControl.instance.isis;
@@ -29,7 +32,9 @@ public class ItemPickup : MonoBehaviour
 
         objectDetailPanel.SetActive(false); ;
 
-        if(item.name == "ankh")
+        pickUpItemClip = Resources.Load<AudioClip>(pathToPickUpSound);
+
+        if (item.name == "ankh")
         {
             item.canPickup = true;
         } 
@@ -37,6 +42,12 @@ public class ItemPickup : MonoBehaviour
         {
             item.canPickup = false;
         }
+
+        // item.pickUpAudioSource = new AudioSource;
+        item.pickUpAudioClip = pickUpItemClip;
+        gameObject.AddComponent<AudioSource>();
+        gameObject.GetComponent<AudioSource>().playOnAwake = false;
+        gameObject.GetComponent<AudioSource>().clip = item.pickUpAudioClip;
     }
 
     private void Update()
@@ -71,28 +82,34 @@ public class ItemPickup : MonoBehaviour
                 Debug.Log("Picking up " + item.name);
                 if (item.name == "ankh")
                 {
+
+                    AudioSource resurectSoundSource = PlayerControl.instance.GetComponent<AudioSource>();
                     //THE ITEM IS AN ANKH
                     if (isis.isDead)
                     {
                         //Resurrect sound
+                        resurectSoundSource.Play();
                         panelText.text = "You found and Ankh! This will ressurrect Isis! But be carefull, now you have " + getNumOfLifes().ToString() + " lifes available and you need to have all players alive to pass this level!";
                         PlayerControl.instance.resurrectThisPlayer(isis);
                     }
                     else if (horus.isDead)
                     {
                         //Resurrect sound
+                        resurectSoundSource.Play();
                         panelText.text = "You found and Ankh! This will ressurrect Horus! But be carefull, now you have " + getNumOfLifes().ToString() + " lifes available and you need to have all players alive to pass this level!";
                         PlayerControl.instance.resurrectThisPlayer(horus);
                     }
                     else if (anubis.isDead)
                     {
                         //Resurrect sound
+                        resurectSoundSource.Play();
                         panelText.text = "You found and Ankh! This will ressurrect Anubis! But be carefull, now you have " + getNumOfLifes().ToString() + " lifes available and you need to have all players alive to pass this level!";
                         PlayerControl.instance.resurrectThisPlayer(anubis);
                     }
                     else
                     {
-                        //Add to inventory sound?
+                        //Add to inventory sound         
+                        AudioSource.PlayClipAtPoint(item.pickUpAudioClip, transform.position);
                         panelText.text = objectDescription;
                         Inventory.instance.AddItem(item);
                     }
@@ -104,6 +121,9 @@ public class ItemPickup : MonoBehaviour
                     //ITEM IS AN ENIGMA ANSWER
                     if(item.canPickup)
                     {
+                        //Add to inventory sound
+                        AudioSource.PlayClipAtPoint(item.pickUpAudioClip, transform.position);
+
                         objectDetailPanel.SetActive(true);
                         Inventory.instance.AddItem(item);
                         panelImage.sprite = objectImage;

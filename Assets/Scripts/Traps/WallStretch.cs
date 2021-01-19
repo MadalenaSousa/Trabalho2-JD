@@ -10,6 +10,13 @@ public class WallStretch : MonoBehaviour
     public float inc = 1;
     float healthValue = 1;
 
+
+    AudioSource[] audioSources;
+    AudioSource sound1;
+    AudioSource sound2;
+
+    AudioSource currentSound;
+
     void Start()
     {
         wallSprite = GetComponent<SpriteRenderer>();
@@ -17,6 +24,13 @@ public class WallStretch : MonoBehaviour
         maxWallWidth = wallSprite.size.x;
         minWallWidth = 2;
         newWidth = minWallWidth;
+
+        audioSources = GetComponentsInParent<AudioSource>();
+        sound1 = audioSources[0];
+        sound2 = audioSources[1];
+
+        currentSound = sound1;
+        currentSound.Play();
     }
 
     
@@ -26,10 +40,32 @@ public class WallStretch : MonoBehaviour
         if(wallSprite.size.x >= maxWallWidth)
         {
             inc = - Mathf.Abs(inc);
+            currentSound.Stop();
+
+            if (currentSound.Equals(sound1))
+            {
+                currentSound = sound2;
+            }
+            else
+            {
+                currentSound = sound1;
+            }
+            currentSound.Play();
         }
         else if(wallSprite.size.x <= minWallWidth)
         {
             inc = Mathf.Abs(inc);
+            currentSound.Stop();
+
+            if (currentSound.Equals(sound1))
+            {
+                currentSound = sound2;
+            }
+            else
+            {
+                currentSound = sound1;
+            }
+            currentSound.Play();
         }
 
         newWidth = newWidth + inc;
