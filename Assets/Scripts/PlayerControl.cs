@@ -23,6 +23,8 @@ public class PlayerControl : MonoBehaviour
 
     public GameObject warningPanel;
 
+    public Animator isisAnimator, horusAnimator, anubisAnimator;
+
     private void Awake()
     {
         if (instance == null)
@@ -33,6 +35,10 @@ public class PlayerControl : MonoBehaviour
         isis = GetComponentInChildren<Isis>();
         horus = GetComponentInChildren<Horus>();
         anubis = GetComponentInChildren<Anubis>();
+
+        isisAnimator = isis.GetComponent<Animator>();
+        horusAnimator = horus.GetComponent<Animator>();
+        anubisAnimator = anubis.GetComponent<Animator>();
 
         currentPlayer = isis;
 
@@ -59,6 +65,15 @@ public class PlayerControl : MonoBehaviour
         {
             FlipHorizontal();
         }
+
+        isisAnimator.SetFloat("ySpeed", moveInputY);
+        isisAnimator.SetFloat("xSpeed", Mathf.Abs(moveInputX));
+
+        horusAnimator.SetFloat("ySpeed", moveInputY);
+        horusAnimator.SetFloat("xSpeed", Mathf.Abs(moveInputX));
+
+        anubisAnimator.SetFloat("ySpeed", moveInputY);
+        anubisAnimator.SetFloat("xSpeed", Mathf.Abs(moveInputX));
 
         if (moveInputX < 0)
         {
@@ -140,17 +155,20 @@ public class PlayerControl : MonoBehaviour
             isis.setPrimaryPlayerCharacteristics();
             horus.setSecondaryPlayerCharacteristics(0.5f);
             anubis.setSecondaryPlayerCharacteristics(-0.5f);
+            isis.isDead = false;
         } else if(currentPlayer == horus)
         {
             horus.setPrimaryPlayerCharacteristics();
             isis.setSecondaryPlayerCharacteristics(0.5f);
             anubis.setSecondaryPlayerCharacteristics(-0.5f);
+            horus.isDead = false;
         }
         else if (currentPlayer == anubis)
         {
             anubis.setPrimaryPlayerCharacteristics();
             isis.setSecondaryPlayerCharacteristics(0.5f);
             horus.setSecondaryPlayerCharacteristics(-0.5f);
+            anubis.isDead = false;
         }
     }
 
@@ -184,7 +202,7 @@ public class PlayerControl : MonoBehaviour
                 warningPanel.SetActive(true);
                 warningPanel.GetComponentInChildren<Text>().text = "Oh no! Your character just died! You need to find an ankh to ressurrect it! Be carefull, you now only have " + numberOfAnkhs + " ankhs available and you need all players alive to pass this level!";
                 SwitchPlayer(getNextLivingPlayer());
-                resurrectThisPlayer(currentPlayer);
+                //resurrectThisPlayer(currentPlayer);
             }
         }
 
@@ -204,7 +222,7 @@ public class PlayerControl : MonoBehaviour
             if (players[i] == playerToKill)
             {
                 //specific character death sound
-                playerToKill.GetComponent<AudioSource>().Play();
+                players[i].GetComponent<AudioSource>().Play();
                 players[i].isDead = true;
             }
         }
