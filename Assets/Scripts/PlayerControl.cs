@@ -169,6 +169,7 @@ public class PlayerControl : MonoBehaviour
             warningPanel.SetActive(true);
             warningPanel.GetComponentInChildren<Text>().text = "Oh no! Your character just died! Thank god you had an ankh on your Inventory! Be carefull, you now only have " + leftOverAnkhs + " ankhs available and you need all players alive to pass this level!";
             currentPlayer.setHealth(currentPlayer.getMaxHealth());
+            GetComponent<AudioSource>().Play();
         } 
         else
         {
@@ -202,6 +203,8 @@ public class PlayerControl : MonoBehaviour
         {
             if (players[i] == playerToKill)
             {
+                //specific character death sound
+                playerToKill.GetComponent<AudioSource>().Play();
                 players[i].isDead = true;
             }
         }

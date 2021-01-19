@@ -9,4 +9,5 @@ public class Item : ScriptableObject
     public Sprite icon = null;
     public string solutionSkill = "none";
     public bool canPickup;
+    public AudioClip pickUpAudioClip;
 }
