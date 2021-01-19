@@ -66,7 +66,6 @@ public class PlayerControl : MonoBehaviour
             FlipHorizontal();
         }
 
-        Debug.Log(moveInputY);
         isisAnimator.SetFloat("ySpeed", moveInputY);
         isisAnimator.SetFloat("xSpeed", Mathf.Abs(moveInputX));
 
@@ -223,7 +222,7 @@ public class PlayerControl : MonoBehaviour
             if (players[i] == playerToKill)
             {
                 //specific character death sound
-                playerToKill.GetComponent<AudioSource>().Play();
+                players[i].GetComponent<AudioSource>().Play();
                 players[i].isDead = true;
             }
         }
