@@ -89,21 +89,21 @@ public class ItemPickup : MonoBehaviour
                     {
                         //Resurrect sound
                         resurectSoundSource.Play();
-                        panelText.text = "You found and Ankh! This will ressurrect Isis! But be carefull, now you have " + getNumOfLifes().ToString() + " lifes available and you need to have all players alive to pass this level!";
+                        panelText.text = "You found and Ankh and ressurrected Isis! But be carefull, now you have " + getNumOfLifes().ToString() + " lifes available and you need to have all players alive to pass this level!";
                         PlayerControl.instance.resurrectThisPlayer(isis);
                     }
                     else if (horus.isDead)
                     {
                         //Resurrect sound
                         resurectSoundSource.Play();
-                        panelText.text = "You found and Ankh! This will ressurrect Horus! But be carefull, now you have " + getNumOfLifes().ToString() + " lifes available and you need to have all players alive to pass this level!";
+                        panelText.text = "You found and Ankh and ressurrected Horus! But be carefull, now you have " + getNumOfLifes().ToString() + " lifes available and you need to have all players alive to pass this level!";
                         PlayerControl.instance.resurrectThisPlayer(horus);
                     }
                     else if (anubis.isDead)
                     {
                         //Resurrect sound
                         resurectSoundSource.Play();
-                        panelText.text = "You found and Ankh! This will ressurrect Anubis! But be carefull, now you have " + getNumOfLifes().ToString() + " lifes available and you need to have all players alive to pass this level!";
+                        panelText.text = "You found and Ankh and ressurrected Anubis! But be carefull, now you have " + getNumOfLifes().ToString() + " lifes available and you need to have all players alive to pass this level!";
                         PlayerControl.instance.resurrectThisPlayer(anubis);
                     }
                     else
