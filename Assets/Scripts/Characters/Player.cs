@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public Dictionary<string, int> skills;
     public bool isActive;
     public bool isDead;
-    public string type;
+    //public string type;
 
     public Player()
     {

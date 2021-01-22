@@ -24,7 +24,7 @@ public class Isis : Player
         maxHealth = 72;
         isDead = false;
         currentHealth = maxHealth;
-        type = "Isis";
+        //type = "Isis";
     }
 
     private void Update()

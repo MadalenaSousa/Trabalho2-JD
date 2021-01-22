@@ -24,7 +24,7 @@ public class Horus : Player
         maxHealth = 100;
         isDead = false;
         currentHealth = maxHealth;
-        type = "Horus";
+        //type = "Horus";
     }
 
     private void Update()
