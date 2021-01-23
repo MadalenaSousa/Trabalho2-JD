@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HoleContact : MonoBehaviour
+public class InstantDeathTrapContact : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D info)
     {

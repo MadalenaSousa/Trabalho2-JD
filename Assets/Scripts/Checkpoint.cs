@@ -8,7 +8,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (player.tag == "Player")
         {
-            GameManager.instance.lastCheckpoitPos = transform.position;
+            PlayerControl.instance.lastCheckpoitPos = transform.position;
         }
     }
 }

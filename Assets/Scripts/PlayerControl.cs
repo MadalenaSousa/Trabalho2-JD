@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerControl : MonoBehaviour
 {
     public static PlayerControl instance;
+    public Vector2 lastCheckpoitPos;
 
     private Rigidbody2D body;
     private float moveInputX, moveInputY;
@@ -43,6 +44,8 @@ public class PlayerControl : MonoBehaviour
         currentPlayer = isis;
 
         inventory = Inventory.instance;
+
+        lastCheckpoitPos = new Vector2(-7, 2);
     }
 
     void Start()
@@ -207,7 +210,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         //Reposition players in last checkpoint
-        transform.position = new Vector3(GameManager.instance.lastCheckpoitPos.x, GameManager.instance.lastCheckpoitPos.y, PlayerControl.instance.transform.position.z);
+        transform.position = new Vector3(lastCheckpoitPos.x, lastCheckpoitPos.y, transform.position.z);
     }
 
     public void killThisPlayer(Player playerToKill)
