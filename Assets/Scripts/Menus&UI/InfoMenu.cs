@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SwitchTabs : MonoBehaviour
+public class InfoMenu : MonoBehaviour
 {
     public GameObject inventoryPanel, characterInfoPanel, infoMenu;
     public Sprite chestClosed;
