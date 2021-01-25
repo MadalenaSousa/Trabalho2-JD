@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerControl : MonoBehaviour
 {
     public static PlayerControl instance;
+    public Vector2 lastCheckpoitPos;
 
     private Rigidbody2D body;
     private float moveInputX, moveInputY;
@@ -43,6 +44,8 @@ public class PlayerControl : MonoBehaviour
         currentPlayer = isis;
 
         inventory = Inventory.instance;
+
+        lastCheckpoitPos = new Vector2(-7, 2);
     }
 
     void Start()
@@ -185,7 +188,7 @@ public class PlayerControl : MonoBehaviour
         if (checkAndUseItem("ankh")) //If there's a ankh in invetory -> use it
         {
             warningPanel.SetActive(true);
-            warningPanel.GetComponentInChildren<Text>().text = "Oh no! Your character just died! Thank god you had an ankh on your Inventory! Be carefull, you now only have " + leftOverAnkhs + " ankhs available and you need all players alive to pass this level!";
+            warningPanel.GetComponentInChildren<Text>().text = "Oh no! Your character just died! Thank god you had an ankh on your inventory! Be carefull, you now only have " + leftOverAnkhs + " ankhs available and you need all players alive to pass this level!";
             currentPlayer.setHealth(currentPlayer.getMaxHealth());
             GetComponent<AudioSource>().Play();
         } 
@@ -200,14 +203,14 @@ public class PlayerControl : MonoBehaviour
             else //switch to a living player
             {
                 warningPanel.SetActive(true);
-                warningPanel.GetComponentInChildren<Text>().text = "Oh no! Your character just died! You need to find an ankh to ressurrect it! Be carefull, you now only have " + numberOfAnkhs + " ankhs available and you need all players alive to pass this level!";
+                warningPanel.GetComponentInChildren<Text>().text = "Oh no! Your character just died! You need to find an ankh to ressurrect them! Be carefull, you now only have " + numberOfAnkhs + " ankhs available and you need all players alive to pass this level!";
                 SwitchPlayer(getNextLivingPlayer());
                 //resurrectThisPlayer(currentPlayer);
             }
         }
 
         //Reposition players in last checkpoint
-        transform.position = new Vector3(GameManager.instance.lastCheckpoitPos.x, GameManager.instance.lastCheckpoitPos.y, PlayerControl.instance.transform.position.z);
+        transform.position = new Vector3(lastCheckpoitPos.x, lastCheckpoitPos.y, transform.position.z);
     }
 
     public void killThisPlayer(Player playerToKill)

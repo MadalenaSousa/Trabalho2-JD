@@ -24,7 +24,7 @@ public class Anubis : Player
         maxHealth = 80;
         isDead = false;
         currentHealth = maxHealth;
-        type = "Anubis";
+        //type = "Anubis";
     }
 
     private void Update()

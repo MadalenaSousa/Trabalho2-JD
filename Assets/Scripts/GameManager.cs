@@ -10,7 +10,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public Vector2 lastCheckpoitPos;
     public Dictionary<string, bool> answers = new Dictionary<string, bool>();
     public float contactDistance = 10f;
     public bool hasAllAnswers = false;
@@ -26,8 +25,6 @@ public class GameManager : MonoBehaviour
         answers.Add("diary", false);
         answers.Add("stone", false);
         answers.Add("clock", false);
-
-        lastCheckpoitPos = new Vector2(-7, 2);
     }
 
     void Update()
@@ -39,12 +36,7 @@ public class GameManager : MonoBehaviour
         }
 
         //Continuous check of win conditions
-        win();
-    }
-
-    void win()
-    {
-        if(answers["wine"] == true && answers["diary"] == true && answers["stone"] == true && answers["clock"] == true)
+        if (answers["wine"] == true && answers["diary"] == true && answers["stone"] == true && answers["clock"] == true)
         {
             hasAllAnswers = true;
         }
