@@ -8,16 +8,19 @@ public class OpenNextLevelDoor : MonoBehaviour
     public Sprite doorOpen;
     public GameObject movingCamera;
 
-    private void OnTriggerEnter2D(Collider2D info)
+    void OnMouseOver()
     {
-        if (info.gameObject.tag == "Player" && GameManager.instance.hasAllAnswers && PlayerControl.instance.checkIfAllPlayersAreAlive()) //Pass to next level conditions
+        if (Input.GetMouseButtonDown(0))
         {
-            gameObject.GetComponent<SpriteRenderer>().sprite = doorOpen;
-            StartCoroutine(ExecuteAfterTime(3));
-        }
-        else
-        {
-            Debug.Log("You need to solve all riddles first!");
+            if (GameManager.instance.hasAllAnswers && PlayerControl.instance.checkIfAllPlayersAreAlive()) //Pass to next level conditions
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = doorOpen;
+                StartCoroutine(ExecuteAfterTime(3));
+            }
+            else
+            {
+                Debug.Log("You need to solve all riddles first!");
+            }
         }
     }
 
