@@ -24,7 +24,7 @@ public class PlayerControl : MonoBehaviour
 
     public GameObject warningPanel;
 
-    public Animator isisAnimator, horusAnimator, anubisAnimator;
+    public Animator animator, isisAnimator, horusAnimator, anubisAnimator;
 
     private void Awake()
     {
@@ -40,6 +40,7 @@ public class PlayerControl : MonoBehaviour
         isisAnimator = isis.GetComponent<Animator>();
         horusAnimator = horus.GetComponent<Animator>();
         anubisAnimator = anubis.GetComponent<Animator>();
+        animator = GetComponent<Animator>();
 
         currentPlayer = isis;
 
