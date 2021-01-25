@@ -23,7 +23,7 @@ public class OpenNextLevelDoor : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (/*GameManager.instance.hasAllAnswers &&*/ PlayerControl.instance.checkIfAllPlayersAreAlive()) //Pass to next level conditions
+            if (GameManager.instance.hasAllAnswers && PlayerControl.instance.checkIfAllPlayersAreAlive()) //Pass to next level conditions
             {
                 gameObject.GetComponent<SpriteRenderer>().sprite = doorOpen;
                 startCutscene = true;
