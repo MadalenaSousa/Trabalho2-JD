@@ -23,7 +23,7 @@ public class OpenNextLevelDoor : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (GameManager.instance.hasAllAnswers && PlayerControl.instance.checkIfAllPlayersAreAlive()) //Pass to next level conditions
+            if (/*GameManager.instance.hasAllAnswers &&*/ PlayerControl.instance.checkIfAllPlayersAreAlive()) //Pass to next level conditions
             {
                 gameObject.GetComponent<SpriteRenderer>().sprite = doorOpen;
                 startCutscene = true;
@@ -35,14 +35,16 @@ public class OpenNextLevelDoor : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.tag == PlayerControl.instance.currentPlayer.tag && startCutscene)
+        bool done = false;
+        if(collision.tag == PlayerControl.instance.currentPlayer.tag && startCutscene && done == false)
         {
             movingCamera.GetComponent<Camera>().enabled = false;
             finalCutsceneCam.GetComponent<Camera>().enabled = true;
             PlayerControl.instance.animator.SetBool("Fade", true);
             StartCoroutine(StartCutsceneAfter(3f));
+            done = true;
         }
     }
 
