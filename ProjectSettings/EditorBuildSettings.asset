@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Start.unity
     guid: ecada2b47911cb5409eeeb18070138ea
   - enabled: 1
+    path: Assets/Scenes/InitialCutscene.unity
+    guid: 5f9f98e019368104bb721c9cbbd183cb
+  - enabled: 1
     path: Assets/Scenes/Win.unity
     guid: 95178c9f6156b3a4f9356a885dca2648
   - enabled: 1

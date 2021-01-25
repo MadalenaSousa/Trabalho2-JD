@@ -11,6 +11,11 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("InitialCutscene");
     }
 
+    public void restart()
+    {
+        SceneManager.LoadScene("InitialCutscene");
+    }
+
     public void quitGame()
     {
         Application.Quit();
