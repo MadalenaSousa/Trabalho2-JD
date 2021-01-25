@@ -7,6 +7,13 @@ public class OpenNextLevelDoor : MonoBehaviour
 {
     public Sprite doorOpen;
     public GameObject movingCamera;
+    GameObject finalCutsceneCam;
+
+    private void Start()
+    {
+        finalCutsceneCam = GameObject.FindGameObjectWithTag("CutsceneCam");
+        finalCutsceneCam.GetComponent<Camera>().enabled = false;
+    }
 
     void OnMouseOver()
     {
@@ -15,7 +22,9 @@ public class OpenNextLevelDoor : MonoBehaviour
             if (GameManager.instance.hasAllAnswers && PlayerControl.instance.checkIfAllPlayersAreAlive()) //Pass to next level conditions
             {
                 gameObject.GetComponent<SpriteRenderer>().sprite = doorOpen;
-                StartCoroutine(ExecuteAfterTime(3));
+                StartCoroutine(ExecuteAfterTime(5));
+                movingCamera.GetComponent<Camera>().enabled = false;
+                finalCutsceneCam.GetComponent<Camera>().enabled = true;
             }
             else
             {
