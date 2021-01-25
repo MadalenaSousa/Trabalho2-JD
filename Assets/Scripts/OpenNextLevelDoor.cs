@@ -42,7 +42,7 @@ public class OpenNextLevelDoor : MonoBehaviour
             movingCamera.GetComponent<Camera>().enabled = false;
             finalCutsceneCam.GetComponent<Camera>().enabled = true;
             PlayerControl.instance.animator.SetBool("Fade", true);
-            StartCoroutine(StartCutsceneAfter(0.45f));
+            StartCoroutine(StartCutsceneAfter(3f));
         }
     }
 
@@ -52,7 +52,8 @@ public class OpenNextLevelDoor : MonoBehaviour
 
         gameObject.GetComponent<SpriteRenderer>().sprite = doorClosed;
         finalCutsceneCam.GetComponentInChildren<Animator>().SetBool("Show", true);
-        StartCoroutine(LoadWinAfter(3));
+        finalCutsceneCam.GetComponentInChildren<AudioSource>().Play();
+        StartCoroutine(LoadWinAfter(5));
     }
 
     IEnumerator LoadWinAfter(float time)

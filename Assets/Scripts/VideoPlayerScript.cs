@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class VideoPlayerScript : MonoBehaviour
 {
     public GameObject videoPlayer;
-    private int videoTime = 32;
+    private int videoTime = 48;
 
     private IEnumerator coroutine;
 
@@ -15,8 +15,6 @@ public class VideoPlayerScript : MonoBehaviour
     {
         coroutine = WaitAndLaodLevel(videoTime);
         StartCoroutine(coroutine);
-        //Object.Destroy(videoPlayer, videoTime);
-        //SceneManager.LoadScene("Level1");
     }
 
     // Update is called once per frame
