@@ -9,30 +9,40 @@ public class OpenNextLevelDoor : MonoBehaviour
     Sprite doorClosed;
     public GameObject movingCamera;
     GameObject finalCutsceneCam;
+    bool startCutscene;
 
     private void Start()
     {
         finalCutsceneCam = GameObject.FindGameObjectWithTag("CutsceneCam");
         finalCutsceneCam.GetComponent<Camera>().enabled = false;
         doorClosed = GetComponent<SpriteRenderer>().sprite;
+        startCutscene = false;
     }
 
     void OnMouseOver()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (GameManager.instance.hasAllAnswers && PlayerControl.instance.checkIfAllPlayersAreAlive()) //Pass to next level conditions
+            if (/*GameManager.instance.hasAllAnswers &&*/ PlayerControl.instance.checkIfAllPlayersAreAlive()) //Pass to next level conditions
             {
                 gameObject.GetComponent<SpriteRenderer>().sprite = doorOpen;
-                movingCamera.GetComponent<Camera>().enabled = false;
-                finalCutsceneCam.GetComponent<Camera>().enabled = true;
-                PlayerControl.instance.animator.SetBool("Fade", true);
-                StartCoroutine(StartCutsceneAfter(0.45f));
+                startCutscene = true;
             }
             else
             {
                 Debug.Log("You need to solve all riddles first!");
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == PlayerControl.instance.currentPlayer.tag && startCutscene)
+        {
+            movingCamera.GetComponent<Camera>().enabled = false;
+            finalCutsceneCam.GetComponent<Camera>().enabled = true;
+            PlayerControl.instance.animator.SetBool("Fade", true);
+            StartCoroutine(StartCutsceneAfter(0.45f));
         }
     }
 
