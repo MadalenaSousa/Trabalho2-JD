@@ -55,11 +55,13 @@ public class ItemPickup : MonoBehaviour
         //Switch to glow sprite if player is in click range
         if(GameManager.instance.checkPlayerProximityToObject(gameObject) && item.canPickup)
         {
-            gameObject.GetComponent<SpriteRenderer>().sprite = glowSprite;
+            //gameObject.GetComponent<SpriteRenderer>().sprite = glowSprite;
+            gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 0);
         }
         else
         {
-            gameObject.GetComponent<SpriteRenderer>().sprite = normalSprite;
+            //gameObject.GetComponent<SpriteRenderer>().sprite = normalSprite;
+            gameObject.transform.localScale = new Vector3(1, 1, 0);
         }
 
         //Change item color if item is pickable
