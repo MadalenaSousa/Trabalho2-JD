@@ -89,28 +89,24 @@ public class ItemPickup : MonoBehaviour
                     //THE ITEM IS AN ANKH
                     if (isis.isDead)
                     {
-                        //Resurrect sound
                         resurectSoundSource.Play();
-                        panelText.text = "You found and Ankh and ressurrected Isis! But be carefull, now you have " + getNumOfLifes().ToString() + " lifes available and you need to have all players alive to pass this level!";
+                        panelText.text = "You resurrected Isis! Carefull, you have " + getNumOfLifes().ToString() + " lifes available and you need all players alive to pass the level!";
                         PlayerControl.instance.resurrectThisPlayer(isis);
                     }
                     else if (horus.isDead)
                     {
-                        //Resurrect sound
                         resurectSoundSource.Play();
-                        panelText.text = "You found and Ankh and ressurrected Horus! But be carefull, now you have " + getNumOfLifes().ToString() + " lifes available and you need to have all players alive to pass this level!";
+                        panelText.text = "You resurrected Horus! Carefull, you have " + getNumOfLifes().ToString() + " lifes available and you need all players alive to pass the level!";
                         PlayerControl.instance.resurrectThisPlayer(horus);
                     }
                     else if (anubis.isDead)
                     {
-                        //Resurrect sound
                         resurectSoundSource.Play();
-                        panelText.text = "You found and Ankh and ressurrected Anubis! But be carefull, now you have " + getNumOfLifes().ToString() + " lifes available and you need to have all players alive to pass this level!";
+                        panelText.text = "You resurrected Anubis! Carefull, you have " + getNumOfLifes().ToString() + " lifes available and you need all players alive to pass the level!";
                         PlayerControl.instance.resurrectThisPlayer(anubis);
                     }
                     else
-                    {
-                        //Add to inventory sound         
+                    {        
                         AudioSource.PlayClipAtPoint(item.pickUpAudioClip, transform.position);
                         panelText.text = objectDescription;
                         Inventory.instance.AddItem(item);
@@ -123,7 +119,6 @@ public class ItemPickup : MonoBehaviour
                     //ITEM IS AN ENIGMA ANSWER
                     if(item.canPickup)
                     {
-                        //Add to inventory sound
                         AudioSource.PlayClipAtPoint(item.pickUpAudioClip, transform.position);
 
                         objectDetailPanel.SetActive(true);
