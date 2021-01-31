@@ -21,10 +21,9 @@ public class Horus : Player
 
         bestSkill = KeyByValue(skills, skills.Values.Max());
 
-        maxHealth = 100;
+        maxHealth = 80;
         isDead = false;
         currentHealth = maxHealth;
-        //type = "Horus";
     }
 
     private void Update()

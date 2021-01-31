@@ -21,10 +21,9 @@ public class Isis : Player
 
         bestSkill = KeyByValue(skills, skills.Values.Max());
 
-        maxHealth = 72;
+        maxHealth = 70;
         isDead = false;
         currentHealth = maxHealth;
-        //type = "Isis";
     }
 
     private void Update()

@@ -21,10 +21,9 @@ public class Anubis : Player
 
         bestSkill = KeyByValue(skills, skills.Values.Max());
 
-        maxHealth = 80;
+        maxHealth = 100;
         isDead = false;
         currentHealth = maxHealth;
-        //type = "Anubis";
     }
 
     private void Update()
