@@ -6,6 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    public GameObject confirmationPanel;
+
+    private void Start()
+    {
+        confirmationPanel.SetActive(false);
+    }
+
+    public void openConfirmPanel()
+    {
+        confirmationPanel.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void closeConfirmPanel()
+    {
+        confirmationPanel.SetActive(false);
+        Time.timeScale = 1;
+    }
+
     public void playGame()
     {
         SceneManager.LoadScene("InitialCutscene");
