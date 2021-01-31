@@ -10,7 +10,10 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        confirmationPanel.SetActive(false);
+        if(confirmationPanel != null)
+        {
+            confirmationPanel.SetActive(false);
+        }
     }
 
     public void openConfirmPanel()
