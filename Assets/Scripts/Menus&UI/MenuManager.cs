@@ -13,7 +13,7 @@ public class MenuManager : MonoBehaviour
 
     public void restart()
     {
-        SceneManager.LoadScene("InitialCutscene");
+        SceneManager.LoadScene("Level1");
     }
 
     public void quitGame()
