@@ -179,17 +179,11 @@ public class PlayerControl : MonoBehaviour
     public void die()
     {
         int numberOfAnkhs = GameObject.FindGameObjectsWithTag("Life").Length;
-        int leftOverAnkhs = numberOfAnkhs - 1;
-        
-        if(numberOfAnkhs == 0)
-        {
-            leftOverAnkhs = 0;
-        }
 
         if (checkAndUseItem("ankh")) //If there's a ankh in invetory -> use it
         {
             warningPanel.SetActive(true);
-            warningPanel.GetComponentInChildren<Text>().text = "Oh no! Your character just died! Thank god you had an ankh on your inventory! Be carefull, you now only have " + leftOverAnkhs + " ankhs available and you need all players alive to pass this level!";
+            warningPanel.GetComponentInChildren<Text>().text = "Oh no! Your character just died! Thank god you had an ankh on your inventory! Be carefull, you now only have " + numberOfAnkhs + " ankhs available and you need all players alive to pass this level!";
             currentPlayer.setHealth(currentPlayer.getMaxHealth());
             GetComponent<AudioSource>().Play();
         } 
@@ -198,7 +192,6 @@ public class PlayerControl : MonoBehaviour
             killThisPlayer(currentPlayer);
             if (getNextLivingPlayer() == null || numberOfAnkhs < numberOfDeadPlayers()) //lose conditions
             {
-                //Lose sound
                 SceneManager.LoadScene("Lose");
             }
             else //switch to a living player
@@ -206,7 +199,6 @@ public class PlayerControl : MonoBehaviour
                 warningPanel.SetActive(true);
                 warningPanel.GetComponentInChildren<Text>().text = "Oh no! Your character just died! You need to find an ankh to ressurrect them! Be carefull, you now only have " + numberOfAnkhs + " ankhs available and you need all players alive to pass this level!";
                 SwitchPlayer(getNextLivingPlayer());
-                //resurrectThisPlayer(currentPlayer);
             }
         }
 
@@ -225,7 +217,6 @@ public class PlayerControl : MonoBehaviour
         {
             if (players[i] == playerToKill)
             {
-                //specific character death sound
                 players[i].GetComponent<AudioSource>().Play();
                 players[i].isDead = true;
             }
@@ -244,7 +235,7 @@ public class PlayerControl : MonoBehaviour
             if (players[i] == playerToResurrect)
             {
                 players[i].isDead = false;
-                players[i].setHealth(players[i].getMaxHealth()); //Should we set it to their specific max health or to the absolute max health?
+                players[i].setHealth(players[i].getMaxHealth());
             }
         }
     }
